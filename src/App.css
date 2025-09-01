@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+:root {
+    --titulos: "Montserrat", sans-serif;
+    --subtitulos: "Roboto", sans-serif;
+    --texto: "Work Sans", sans-serif;
+    --colorPrincipal: #720000; /* Quité las comillas */
+    --colorSecundario: #5a0000;
+    --colorFondo: #F5F5F5;
+    --colorTitulo: #222222;
+    --colorTexto: #444444;
+    --transition: all 0.3s ease-in-out;
+    --colorOscuro: #2a0000;
+    --colorOscuroMenu: #1a0000; /* Añadí esta variable que mencionaste antes */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    font-family: var(--texto);
+    line-height: 1.6;
+    color: var(--colorTexto);
+    background-color: var(--colorFondo);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+    font-family: var(--titulos);
+    text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+h2, h3, h4, h5, h6 {
+    font-family: var(--subtitulos);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Estilos adicionales que podrías necesitar */
+a {
+    color: var(--colorPrincipal);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--colorSecundario);
+}
+
+button {
+    font-family: var(--texto);
+}
+
+/* Clases de utilidad para usar en tus componentes */
+.text-titulo {
+    font-family: var(--titulos);
+}
+
+.text-subtitulo {
+    font-family: var(--subtitulos);
+}
+
+.text-normal {
+    font-family: var(--texto);
+}
+
+.bg-principal {
+    background-color: var(--colorPrincipal);
+}
+
+.bg-secundario {
+    background-color: var(--colorSecundario);
 }

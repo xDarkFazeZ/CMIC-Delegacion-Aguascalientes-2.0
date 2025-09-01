@@ -1,0 +1,83 @@
+.hero {
+    margin-top: -20px; /* altura mínima a pantalla completa */
+    min-height: 0vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+}
+
+
+.hero-titulo {
+    font-size: 4rem;
+    margin: 0;
+    color: white;
+}
+.hero-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-subtitulo {
+    text-align: center;
+    font-size: 1.6rem;
+    max-width: 600px;
+    margin-top: 1rem;
+    color: #f0f0f0;
+    margin-bottom: 10px;
+}
+.boton,
+.boton-hero {
+    display: inline-block;
+    background-color: var(--colorPrincipal);
+    color: white;
+    padding: 1.2rem 2.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--titulos);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.boton:hover,
+.boton-hero:hover {
+    background-color: var(--colorFondo);
+}
+
+/* --- Ajustes responsivos --- */
+@media (max-width: 840px) {
+    .hero {
+        min-height: auto;  /* ya no fuerza 100vh */
+        padding: 4rem 2rem; /* respira mejor en móvil */
+    }
+
+    .hero-titulo {
+        font-size: 2.5rem;
+        margin-top: 0;  /* quita el -25rem */
+    }
+
+    .hero-texto {
+        font-size: 1.2rem;
+    }
+}
+/* Para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .hero {
+        min-height: auto;  /* ya no fuerza 100vh */
+        padding: 4rem 2rem; /* respira mejor en móvil */
+    }
+        .hero-titulo {
+        font-size: 2.5rem;
+        margin-top: 0;  /* quita el -25rem */
+    }
+}

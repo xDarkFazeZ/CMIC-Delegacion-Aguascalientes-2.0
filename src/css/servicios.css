@@ -1,0 +1,90 @@
+/* src/css/servicios.css */
+.servicios {
+  padding: 4rem 2rem;
+  background-color: var(--colorFondo);
+  text-align: center;
+  margin-top: -50px;
+}
+
+.seccion-titulo {
+  font-family: var(--titulos);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: -10px;
+  color: var(--colorTitulo);
+}
+
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.servicio-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.servicio-card:hover {
+  transform: translateY(-5px);
+}
+
+.servicio-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.servicio-contenido {
+  padding: 1.5rem;
+}
+
+.servicio-titulo {
+  font-size: 1.3rem;
+  color: var(--colorPrincipal);
+  margin-bottom: 0.8rem;
+}
+
+.servicio-texto {
+  font-size: 1rem;
+  color: var(--colorTexto);
+  margin-bottom: 1.2rem;
+}
+
+.boton {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background: var(--colorPrincipal);
+  color: #fff;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.boton:hover {
+  background: var(--colorSecundario);
+}
+
+/* src/css/servicios.css */
+.ver-mas-container {
+  text-align: center;
+  margin-top: -10px;
+  padding-top: 2rem;
+}
+
+.boton-secundario {
+  border: 2px solid var(--colorPrincipal);
+  color: white;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+}
+
+.boton-secundario:hover {
+  background-color: var(--colorSecundario);
+  color: white;
+}

@@ -1,0 +1,125 @@
+.contenedor {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.carrusel {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.carrusel-inner {
+    display: flex;
+    transition: transform 0.1s linear;
+    /* linear para movimiento constante */
+    will-change: transform;
+    align-items: center;
+}
+
+.carrusel-item {
+    flex: 0 0 auto;
+    min-width: 280px;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.carrusel-item:hover {
+    transform: scale(1.02);
+}
+
+/* Imágenes horizontales */
+.carrusel-img.horizontal {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    /* Para horizontales usamos cover */
+    display: block;
+}
+
+/* Imágenes verticales */
+.carrusel-img.vertical {
+    width: auto;
+    height: 300px;
+    object-fit: contain;
+    /* Para verticales usamos contain */
+    display: block;
+}
+
+/* Imagen por defecto (fallback) */
+.carrusel-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Efecto de borde para imágenes verticales */
+.carrusel-item[data-orientation="vertical"] {
+    padding: 15px;
+}
+
+.carrusel-loading {
+    text-align: center;
+    padding: 100px 0;
+    font-size: 18px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .carrusel-item {
+        min-width: 240px;
+        margin: 0 12px;
+    }
+
+    .carrusel-img.horizontal {
+        height: 220px;
+    }
+
+    .carrusel-img.vertical {
+        height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carrusel-item {
+        min-width: 200px;
+        margin: 0 10px;
+    }
+
+    .carrusel-img.horizontal {
+        height: 180px;
+    }
+
+    .carrusel-img.vertical {
+        height: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carrusel-item {
+        min-width: 160px;
+        margin: 0 8px;
+    }
+
+    .carrusel-img.horizontal {
+        height: 150px;
+    }
+
+    .carrusel-img.vertical {
+        height: 200px;
+    }
+
+    .carrusel-item[data-orientation="vertical"] {
+        padding: 10px;
+    }
+}

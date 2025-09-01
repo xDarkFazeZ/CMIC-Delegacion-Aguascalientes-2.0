@@ -1,0 +1,94 @@
+/* FOOTER */
+.footer {
+    background-color: var(--colorPrincipal);
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 3rem;
+}
+
+.footer-contenido {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: var(--subtitulos);
+}
+
+.footer-seccion h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    border-bottom: 2px solid var(--colorSecundario);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.footer-seccion p,
+.footer-contacto p {
+    margin-bottom: 0.8rem;
+}
+
+.footer-enlaces {
+    list-style: none;
+}
+
+.footer-enlaces li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-enlace {
+    color: var(--texto);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-enlace:hover {
+    color: white;
+}
+
+.footer-redes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-redes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Efecto de flotación para los iconos */
+.footer-redes a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores específicos para cada red social al hacer hover */
+.footer-redes a[aria-label="Facebook"]:hover {
+    background-color: #3b5998;
+}
+
+.footer-redes a[aria-label="Instagram"]:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.footer-derechos {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer--derechos {
+    text-align: center;
+}
