@@ -52,6 +52,9 @@
 .boton:hover,
 .boton-hero:hover {
     background-color: var(--colorFondo);
+    color: #f0f0f0;
+      transform: translateY(-2px);
+
 }
 
 /* --- Ajustes responsivos --- */

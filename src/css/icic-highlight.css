@@ -229,8 +229,6 @@
     position: relative;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    background: white;
     padding: 1.5rem;
 }
 
@@ -273,12 +271,10 @@
 
 /* Sección de calendario mejorada */
 .calendar-section {
-    margin-top: 2rem;
+    margin-top: -20px;
     text-align: center;
-    background: white;
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .calendar-section h4 {
@@ -293,7 +289,6 @@
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     max-width: 500px;
     margin: 0 auto;
@@ -301,7 +296,6 @@
 
 .calendar-preview:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .calendar-image {
@@ -312,7 +306,7 @@
 
 
 .calendar-description {
-    color: #6c757d;
+    color: black;
     margin-top: 1rem;
     font-size: 1rem;
 }
@@ -498,6 +492,7 @@
     .icic-logo {
         width: 300px;
         height: 300px;
+        margin-top: -150px;
     }
     
     .calendar-image {
@@ -516,6 +511,9 @@
 }
 
 @media (max-width: 576px) {
+    .icic-logo{
+        margin-top: -100px;
+    }
     .section-title {
         font-size: 1.9rem;
     }

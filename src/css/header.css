@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 5px 20px;
-    /* padding más pequeño para hacerlo compacto */
     background: var(--colorPrincipal);
     color: white;
     position: fixed;
@@ -24,7 +23,6 @@
 .header.scrolled {
     padding: 5px 20px;
     background: var(--colorOscuro);
-    /* Cambiado a color oscuro */
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
@@ -33,24 +31,21 @@
 .logo-container {
     height: 60px;
     z-index: 1001;
-    /* Por encima del menú móvil */
     transition: var(--transition);
 }
 
 .logo {
     height: 90px;
-    margin-top: -9px;
+    margin-top: 5px;
     transition: var(--transition);
     margin-left: -20px;
 }
 
-/* Header con scroll - logo más pequeño */
 .header.scrolled .logo {
     height: 90px;
-    margin-top: -9px;
+    margin-top: 5px;
 }
 
-/* Ocultar logo cuando el menú está abierto en móvil */
 .logo-container.hidden {
     opacity: 0;
     visibility: hidden;
@@ -75,7 +70,6 @@
 }
 
 .nav-menu ul li a:hover {
-    color: #f39c12;
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -86,7 +80,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: #f39c12;
+    background: #ffffff;
     transition: var(--transition);
     transform: translateX(-50%);
 }
@@ -173,13 +167,13 @@
 
     .logo {
         max-height: 115px;
-        margin-top: -9px;
+        margin-top: 5px;
         margin-left: -16px;
     }
 
     .header.scrolled .logo {
+        margin-top: 5px;
         max-height: 100px;
-        margin-top: -9px;
     }
 
     .nav-menu {
@@ -270,13 +264,14 @@
 
     .logo {
         max-height: 150px;
-        margin-top: -8px;
         margin-left: -20px;
+        margin-top: 1px;
+        
     }
 
     .header.scrolled .logo {
         max-height: 150px;
-        margin-top: -8px;
+        margin-top: 1px;
     }
 
     .nav-menu {

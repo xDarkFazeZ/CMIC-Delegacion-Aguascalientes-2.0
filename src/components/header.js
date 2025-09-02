@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // 🔹 Importamos Link
 import "../css/header.css";
 import "../App.css";
+
 const logo = "/img/imagen2.png";
 
 export default function Header() {
@@ -12,53 +14,46 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  // Cerrar el menú al hacer clic en un enlace
   const handleLinkClick = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
+    if (isOpen) setIsOpen(false);
   };
 
-  // Detectar cambios en el tamaño de la ventana
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 840;
       setIsMobile(mobile);
-      
-      // Si cambiamos a desktop, cerramos el menú
-      if (!mobile && isOpen) {
-        setIsOpen(false);
-      }
+      if (!mobile && isOpen) setIsOpen(false);
     };
 
-    // Detectar scroll para cambiar estilo del header
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isOpen]);
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isOpen && isMobile ? 'menu-open' : ''}`}>
-      {/* Logo - Se oculta cuando el menú está abierto en móvil */}
-      <div className={`logo-container ${isOpen ? 'hidden' : ''}`}>
-        <img src={logo} alt="Logo" className="logo" />
+    <header
+      className={`header ${isScrolled ? "scrolled" : ""} ${
+        isOpen && isMobile ? "menu-open" : ""
+      }`}
+    >
+      {/* Logo */}
+      <div className={`logo-container ${isOpen ? "hidden" : ""}`}>
+        <Link to="/" onClick={handleLinkClick}>
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
       </div>
 
-      {/* Botón hamburguesa con animación */}
-      <div 
-        className={`hamburger ${isOpen ? "active" : ""}`} 
+      {/* Botón hamburguesa */}
+      <div
+        className={`hamburger ${isOpen ? "active" : ""}`}
         onClick={toggleMenu}
         aria-label="Menú de navegación"
       >
@@ -69,20 +64,37 @@ export default function Header() {
 
       {/* Menú de navegación */}
       <nav className={`nav-menu ${isOpen ? "active" : ""}`}>
-        {/* Logo en el menú móvil */}
         <div className="mobile-logo">
-          <img src={logo} alt="Logo" />
+          <Link to="/home" onClick={handleLinkClick}>
+            <img src={logo} alt="Logo" />
+          </Link>
         </div>
-        
+
         <ul>
-          <li><a href="#inicio" onClick={handleLinkClick}>Inicio</a></li>
-          <li><a href="#servicios" onClick={handleLinkClick}>Servicios</a></li>
-          <li><a href="#nosotros" onClick={handleLinkClick}>Nosotros</a></li>
-          <li><a href="#contacto" onClick={handleLinkClick}>Contacto</a></li>
+          <li>
+            <Link to="/" onClick={handleLinkClick}>
+              Inicio
+            </Link>
+          </li>
+          <li>
+            <Link to="/serviciosPage" onClick={handleLinkClick}>
+              Servicios
+            </Link>
+          </li>
+          <li>
+            <Link to="/nosotros" onClick={handleLinkClick}>
+              Nosotros
+            </Link>
+          </li>
+          <li>
+            <Link to="/contacto" onClick={handleLinkClick}>
+              Contacto
+            </Link>
+          </li>
         </ul>
       </nav>
 
-      {/* Overlay para cerrar el menú al hacer clic fuera */}
+      {/* Overlay */}
       {isOpen && isMobile && (
         <div className="menu-overlay" onClick={toggleMenu}></div>
       )}

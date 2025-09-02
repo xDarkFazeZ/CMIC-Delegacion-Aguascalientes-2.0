@@ -1,35 +1,34 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Hero from "./components/hero";
 import Servicios from "./components/servicios";
 import Afiliados from "./components/afiliados";
-import Noticias from "./components/noticias";
-import IcicHighlight from "./components/icic-highlight"; // Nueva sección
-import Contacto from "./components/contacto";
+import IcicHighlight from "./components/icic-highlight"; 
 import Footer from "./components/footer";
-import IcicPage from "./pages/icic"; // Página completa del ICIC
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <>
       <Header />
       <Routes>
+        {/* Página principal */}
         <Route
           path="/"
           element={
             <>
               <Hero />
-                            <Afiliados />
+              <Afiliados />
               <Servicios />
-              <IcicHighlight /> {/* Sección destacada del ICIC */}
-
-              <Footer />
+              <IcicHighlight />
             </>
           }
         />
-        <Route path="/icic" element={<IcicPage />} />
+
+        {/* Página completa del ICIC */}
+        <Route path="/icic" element={<icic />} />
       </Routes>
+      <Footer />
     </>
   );
 };
