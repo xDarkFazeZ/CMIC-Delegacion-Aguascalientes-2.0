@@ -8,7 +8,7 @@
     --colorFondo: #F5F5F5;
     --colorTitulo: #222222;
     --colorTexto: #444444;
-    --transition: all 0.3s ease-in-out;
+    --transition: all 0.6s ease-in-out;
     --colorOscuro: #2a0000;
     --colorOscuroMenu: #1a0000;
 }
@@ -21,6 +21,19 @@
   position: relative;
   font-family: var(--texto);
   margin-top: 100px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+}
+
+.courses-section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.courses-section.animate-out {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .section-title {
@@ -31,12 +44,38 @@
   position: relative;
   display: inline-block;
   font-family: var(--titulos);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+
+.section-title.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title.animate-out {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .logo-container {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: var(--transition);
+}
+
+.logo-container.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.logo-container.animate-out {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 .itc-logo {
@@ -57,6 +96,19 @@
   margin-left: auto;
   margin-right: auto;
   font-family: var(--subtitulos);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+
+.section-subtitle.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-subtitle.animate-out {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 /* Grid de exactamente 3 columnas para las tarjetas */
@@ -79,6 +131,19 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+.course-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.course-card.animate-out {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .course-card:hover {
@@ -212,6 +277,19 @@
 /* Ver más */
 .see-more {
   margin-top: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+
+.see-more.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.see-more.animate-out {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .more-courses-btn {
@@ -315,8 +393,7 @@
     border-radius: 12px;
     padding: 15px;
     margin-top: -100px;
-}
-
+  }
   
   .section-title {
     font-size: 2rem;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { client } from "../lib/sanity";
 import { useNavigate } from "react-router-dom";
 import "../css/servicios.css";
@@ -8,6 +8,14 @@ const Servicios = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  
+  // Refs para animaciones
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const logoRef = useRef(null);
+  const cardRefs = useRef([]);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -36,6 +44,45 @@ const Servicios = () => {
 
     fetchCourses();
   }, []);
+
+  // Configurar Intersection Observer para animaciones reversibles
+  useEffect(() => {
+    if (loading || error) return;
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Cuando el elemento entra en el viewport
+          entry.target.classList.add("animate-in");
+          entry.target.classList.remove("animate-out");
+        } else {
+          // Cuando el elemento sale del viewport
+          entry.target.classList.add("animate-out");
+          entry.target.classList.remove("animate-in");
+        }
+      });
+    }, observerOptions);
+    
+    // Observar todos los elementos que queremos animar
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (titleRef.current) observer.observe(titleRef.current);
+    if (subtitleRef.current) observer.observe(subtitleRef.current);
+    if (logoRef.current) observer.observe(logoRef.current);
+    if (buttonRef.current) observer.observe(buttonRef.current);
+    
+    cardRefs.current.forEach(card => {
+      if (card) observer.observe(card);
+    });
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, [loading, error, courses]);
 
   const handleCourseClick = (course) => {
     if (course.slug?.current) {
@@ -73,20 +120,26 @@ const Servicios = () => {
   }
 
   return (
-    <section className="courses-section" aria-labelledby="courses-heading">
-                <div className="logo-container">
-            <img 
-              src="/img/itc-logo.jpg"
-              alt="Logo itc"
-              className="itc-logo"
-            />
-          </div>
-      <h2 id="courses-heading" className="section-title">Nuestros Programas</h2>
-      <p className="section-subtitle">El Tecnológico de la Construcción es la Única Institución especializada en construcción en América Latina y es por ello que contamos con catedráticos profesionales</p>
+    <section className="courses-section" ref={sectionRef} aria-labelledby="courses-heading">
+      <div className="logo-container" ref={logoRef}>
+        <img 
+          src="/img/itc-logo.jpg"
+          alt="Logo ITC"
+          className="itc-logo"
+        />
+      </div>
+      
+      <h2 id="courses-heading" className="section-title" ref={titleRef}>Nuestros Programas</h2>
+      <p className="section-subtitle" ref={subtitleRef}>Descubre nuestras maestrías y especializaciones de alto nivel</p>
       
       <div className="courses-grid-three">
-        {courses.map((course) => (
-          <div className="course-card" key={course._id}>
+        {courses.map((course, index) => (
+          <div 
+            className="course-card" 
+            key={course._id}
+            ref={el => cardRefs.current[index] = el}
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
             <div className="course-image">
               <img 
                 src={course.imagenUrl} 
@@ -129,7 +182,7 @@ const Servicios = () => {
         ))}
       </div>
       
-      <div className="see-more">
+      <div className="see-more" ref={buttonRef}>
         <button
           className="more-courses-btn"
           onClick={() => navigate("/serviciosPage")}

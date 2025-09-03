@@ -1,5 +1,5 @@
 // src/components/IcicHighlight.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { client, urlFor } from '../lib/sanity'
 import "../css/icic-highlight.css";
@@ -12,17 +12,27 @@ const IcicHighlight = () => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const navigate = useNavigate();
 
+  // Refs para animaciones
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const logoRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const infoRef = useRef(null);
+  const galleryRef = useRef(null);
+  const statsRefs = useRef([]);
+  const featureRefs = useRef([]);
+  const buttonRef = useRef(null);
+  const calendarRef = useRef(null);
+
   // Efecto para bloquear el scroll cuando los modales están abiertos
   useEffect(() => {
     if (selectedImage || showCalendarModal) {
-      // Bloquear scroll
       document.body.style.overflow = 'hidden';
     } else {
-      // Restaurar scroll
       document.body.style.overflow = 'unset';
     }
 
-    // Cleanup function para restaurar el scroll cuando el componente se desmonte
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -31,7 +41,6 @@ const IcicHighlight = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch gallery images
         const galleryQuery = `*[_type == "icicGallery"]{
           _id,
           titulo,
@@ -39,7 +48,6 @@ const IcicHighlight = () => {
           "descripcion": descripcion[0].children[0].text
         }`;
         
-        // Fetch calendar image
         const calendarQuery = `*[_type == "calendarioCursos"][0]{
           _id,
           titulo,
@@ -60,6 +68,49 @@ const IcicHighlight = () => {
     };
     fetchData();
   }, []);
+
+  // Configurar Intersection Observer para animaciones
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          entry.target.classList.remove("animate-out");
+        } else {
+          entry.target.classList.add("animate-out");
+          entry.target.classList.remove("animate-in");
+        }
+      });
+    }, observerOptions);
+    
+    // Observar todos los elementos que queremos animar
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (headerRef.current) observer.observe(headerRef.current);
+    if (logoRef.current) observer.observe(logoRef.current);
+    if (titleRef.current) observer.observe(titleRef.current);
+    if (subtitleRef.current) observer.observe(subtitleRef.current);
+    if (infoRef.current) observer.observe(infoRef.current);
+    if (galleryRef.current) observer.observe(galleryRef.current);
+    if (buttonRef.current) observer.observe(buttonRef.current);
+    if (calendarRef.current) observer.observe(calendarRef.current);
+    
+    statsRefs.current.forEach(stat => {
+      if (stat) observer.observe(stat);
+    });
+    
+    featureRefs.current.forEach(feature => {
+      if (feature) observer.observe(feature);
+    });
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, [icicImages, calendarImage]);
 
   useEffect(() => {
     if (icicImages.length > 0) {
@@ -87,35 +138,35 @@ const IcicHighlight = () => {
   };
 
   return (
-    <section id="icic" className="icic-highlight">
+    <section id="icic" className="icic-highlight" ref={sectionRef}>
       <div className="contenedor">
-        <div className="icic-header">
-          <div className="logo-container">
+        <div className="icic-header" ref={headerRef}>
+          <div className="logo-container" ref={logoRef}>
             <img 
               src="/img/icic-logo.png" 
               alt="Logo ICIC" 
               className="icic-logo"
             />
           </div>
-          <h2 className="section-title">ICIC - Instituto de Capacitación</h2>
-          <p className="section-subtitle">Formamos a los profesionales del futuro en la industria de la construcción</p>
+          <h2 className="section-title" ref={titleRef}>ICIC - Instituto de Capacitación</h2>
+          <p className="section-subtitle" ref={subtitleRef}>Formamos a los profesionales del futuro en la industria de la construcción</p>
         </div>
         
         <div className="icic-grid">
-          <div className="icic-info">
+          <div className="icic-info" ref={infoRef}>
             <div className="icic-description">
               <p>El Instituto de Capacitación de la Industria de la Construcción (ICIC) ofrece programas de formación especializada con certificaciones reconocidas a nivel nacional e internacional.</p>
               
               <div className="stats-grid">
-                <div className="stat">
+                <div className="stat" ref={el => statsRefs.current[0] = el}>
                   <span className="stat-number">50+</span>
                   <span className="stat-label">Cursos disponibles</span>
                 </div>
-                <div className="stat">
+                <div className="stat" ref={el => statsRefs.current[1] = el}>
                   <span className="stat-number">2,000+</span>
                   <span className="stat-label">Estudiantes capacitados</span>
                 </div>
-                <div className="stat">
+                <div className="stat" ref={el => statsRefs.current[2] = el}>
                   <span className="stat-number">98%</span>
                   <span className="stat-label">Tasa de satisfacción</span>
                 </div>
@@ -123,21 +174,21 @@ const IcicHighlight = () => {
             </div>
             
             <div className="features-grid">
-              <div className="feature-card">
+              <div className="feature-card" ref={el => featureRefs.current[0] = el}>
                 <div className="feature-icon">📚</div>
                 <div className="feature-content">
                   <h4>Cursos Técnicos</h4>
                   <p>Programas especializados en todas las áreas de construcción</p>
                 </div>
               </div>
-              <div className="feature-card">
+              <div className="feature-card" ref={el => featureRefs.current[1] = el}>
                 <div className="feature-icon">🏆</div>
                 <div className="feature-content">
                   <h4>Certificaciones</h4>
                   <p>Diplomas con validez oficial y reconocimiento sectorial</p>
                 </div>
               </div>
-              <div className="feature-card">
+              <div className="feature-card" ref={el => featureRefs.current[2] = el}>
                 <div className="feature-icon">👥</div>
                 <div className="feature-content">
                   <h4>Profesores Expertos</h4>
@@ -146,7 +197,7 @@ const IcicHighlight = () => {
               </div>
             </div>
             
-            <div className="button-container">
+            <div className="button-container" ref={buttonRef}>
               <button 
                 className="cta-button"
                 onClick={() => navigate("/icic")}
@@ -159,7 +210,7 @@ const IcicHighlight = () => {
             </div>
           </div>
           
-          <div className="icic-gallery">
+          <div className="icic-gallery" ref={galleryRef}>
             <h3>Nuestros estudiantes en acción</h3>
             
             {icicImages.length > 0 ? (
@@ -190,7 +241,7 @@ const IcicHighlight = () => {
 
             {/* Sección del Calendario Mejorada */}
             {calendarImage && (
-              <div className="calendar-section">
+              <div className="calendar-section" ref={calendarRef}>
                 <h4>Calendario de Cursos 2024</h4>
                 <div 
                   className="calendar-preview"

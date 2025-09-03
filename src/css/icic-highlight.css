@@ -1,9 +1,26 @@
 /* src/css/icic-highlight.css */
+:root {
+    --transition: all 0.6s ease-in-out;
+}
+
 .icic-highlight {
     padding: 5rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition);
+}
+
+.icic-highlight.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.icic-highlight.animate-out {
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .icic-highlight::before {
@@ -18,7 +35,6 @@
     z-index: 0;
 }
 
-
 .contenedor {
     position: relative;
     z-index: 1;
@@ -30,12 +46,38 @@
 .icic-header {
     text-align: center;
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.icic-header.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.icic-header.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .logo-container {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: var(--transition);
+}
+
+.logo-container.animate-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.logo-container.animate-out {
+    opacity: 0;
+    transform: scale(0.8);
 }
 
 .icic-logo {
@@ -53,6 +95,19 @@
     margin-bottom: 0.5rem;
     font-weight: 700;
     background-clip: text;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.section-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .section-subtitle {
@@ -61,6 +116,19 @@
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.5;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.section-subtitle.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-subtitle.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .icic-grid {
@@ -74,6 +142,46 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: var(--transition);
+}
+
+.icic-info.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.icic-info.animate-out {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.icic-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: var(--transition);
+}
+
+.icic-gallery.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.icic-gallery.animate-out {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.icic-gallery h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #212529;
+    font-size: 1.6rem;
+    font-weight: 600;
 }
 
 .icic-description {
@@ -101,6 +209,19 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.stat.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .stat:hover {
@@ -140,6 +261,19 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.feature-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-card.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .feature-card:hover {
@@ -177,6 +311,19 @@
     justify-content: center;
     width: 100%;
     margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.button-container.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.button-container.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .cta-button {
@@ -197,20 +344,6 @@
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
-}
-
-.icic-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.icic-gallery h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #212529;
-    font-size: 1.6rem;
-    font-weight: 600;
 }
 
 /* Carrusel sin controles */
@@ -264,6 +397,19 @@
     text-align: center;
     padding: 2rem;
     border-radius: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.calendar-section.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.calendar-section.animate-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .calendar-section h4 {
@@ -292,7 +438,6 @@
     height: 250px;
     object-fit: cover;
 }
-
 
 .calendar-description {
     color: black;
