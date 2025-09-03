@@ -1,79 +1,141 @@
-// src/components/Servicios.js
-import React, { useEffect, useState } from "react";
-import { client } from '../sanity/sanityClient';
-import { urlFor } from '../utils/imageUtils';
+import React, { useState, useEffect } from "react";
+import { client } from "../lib/sanity";
 import { useNavigate } from "react-router-dom";
 import "../css/servicios.css";
 
 const Servicios = () => {
-  const [servicios, setServicios] = useState([]);
-  const [totalServicios, setTotalServicios] = useState(0);
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchServicios = async () => {
+    const fetchCourses = async () => {
       try {
-        // Query para los primeros 3 servicios
-        const queryServicios = `*[_type == "servicio"][0...3]{
-          _id,
-          titulo,
-          descripcion,
-          imagen
-        }`;
-        
-        // Query para contar el total de servicios
-        const queryTotal = `count(*[_type == "servicio"])`;
-        
-        const [data, total] = await Promise.all([
-          client.fetch(queryServicios),
-          client.fetch(queryTotal)
-        ]);
-        
-        setServicios(data);
-        setTotalServicios(total);
-      } catch (error) {
-        console.error("Error al cargar servicios:", error);
+        setLoading(true);
+        const data = await client.fetch(
+          `*[_type == "servicios"] | order(_createdAt desc)[0...3]{
+            _id,
+            nombre_maestria,
+            requisitos,
+            descripcion_corta,
+            duracion,
+            "imagenUrl": imagen.asset->url,
+            slug
+          }`
+        );
+        setCourses(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error al cargar servicios:", err);
+        setError("No se pudieron cargar los cursos. Intente nuevamente.");
+      } finally {
+        setLoading(false);
       }
     };
-    fetchServicios();
+
+    fetchCourses();
   }, []);
 
-  return (
-    <section id="servicios" className="servicios">
-      <div className="contenedor">
-        <h2 className="seccion-titulo">Nuestros Servicios</h2>
-        <div className="servicios-grid">
-          {servicios.map((s) => (
-            <div className="servicio-card" key={s._id}>
-              <div className="servicio-img">
-                <img src={urlFor(s.imagen).url()} alt={s.titulo} />
-              </div>
-              <div className="servicio-contenido">
-                <h3 className="servicio-titulo">{s.titulo}</h3>
-                <p className="servicio-texto">{s.descripcion}</p>
-                <button
-                  className="boton"
-                  onClick={() => navigate("/servicios")}
-                >
-                  Más información
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+  const handleCourseClick = (course) => {
+    if (course.slug?.current) {
+      navigate(`/servicios/${course.slug.current}`);
+    } else {
+      navigate("/serviciosPage");
+    }
+  };
 
-        {/* Botón "Conocer más servicios" - SIEMPRE visible */}
-        <div className="ver-mas-container">
+  if (loading) {
+    return (
+      <section className="courses-section">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Cargando cursos...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="courses-section">
+        <div className="error-container">
+          <p>{error}</p>
           <button 
-            className="boton boton-secundario"
-            onClick={() => navigate("/servicios")}
+            className="retry-btn"
+            onClick={() => window.location.reload()}
           >
-            {totalServicios > 3 
-              ? `Conocer más servicios (${totalServicios - 3} más disponibles)`
-              : "Ver todos nuestros servicios"
-            }
+            Reintentar
           </button>
         </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="courses-section" aria-labelledby="courses-heading">
+                <div className="logo-container">
+            <img 
+              src="/img/itc-logo.jpg"
+              alt="Logo itc"
+              className="itc-logo"
+            />
+          </div>
+      <h2 id="courses-heading" className="section-title">Nuestros Programas</h2>
+      <p className="section-subtitle">El Tecnológico de la Construcción es la Única Institución especializada en construcción en América Latina y es por ello que contamos con catedráticos profesionales</p>
+      
+      <div className="courses-grid-three">
+        {courses.map((course) => (
+          <div className="course-card" key={course._id}>
+            <div className="course-image">
+              <img 
+                src={course.imagenUrl} 
+                alt={course.nombre_maestria}
+                loading="lazy"
+              />
+              {course.duracion && (
+                <span className="course-duration">{course.duracion}</span>
+              )}
+            </div>
+            
+            <div className="course-info">
+              <h3>{course.nombre_maestria}</h3>
+              
+              {course.descripcion_corta && (
+                <p className="course-description">{course.descripcion_corta}</p>
+              )}
+              
+              <div className="requirements-container">
+                <h4 className="requirements-title">Requisitos</h4>
+                <ul>
+                  {course.requisitos?.slice(0, 3).map((req, idx) => (
+                    <li key={idx}>{req}</li>
+                  ))}
+                  {course.requisitos?.length > 3 && (
+                    <li className="more-items">+{course.requisitos.length - 3} más</li>
+                  )}
+                </ul>
+              </div>
+              
+              <button
+                className="info-btn"
+                onClick={() => handleCourseClick(course)}
+                aria-label={`Más información sobre ${course.nombre_maestria}`}
+              >
+                Más información
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="see-more">
+        <button
+          className="more-courses-btn"
+          onClick={() => navigate("/serviciosPage")}
+        >
+          Ver todos los programas
+        </button>
       </div>
     </section>
   );

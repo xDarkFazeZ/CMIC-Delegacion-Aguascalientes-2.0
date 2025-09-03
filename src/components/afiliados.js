@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { client } from '../sanity/sanityClient';
-import { urlFor } from '../utils/imageUtils';
+import { client, urlFor } from '../lib/sanity'
 import { useNavigate } from "react-router-dom";
 import "../css/afiliados.css";
 

@@ -1,8 +1,7 @@
 // src/components/IcicHighlight.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { client } from '../sanity/sanityClient';
-import { urlFor } from '../utils/imageUtils';
+import { client, urlFor } from '../lib/sanity'
 import "../css/icic-highlight.css";
 
 const IcicHighlight = () => {

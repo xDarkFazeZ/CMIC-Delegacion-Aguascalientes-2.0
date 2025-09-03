@@ -5,6 +5,7 @@ import Servicios from "./components/servicios";
 import Afiliados from "./components/afiliados";
 import IcicHighlight from "./components/icic-highlight"; 
 import Footer from "./components/footer";
+import ServiciosPage from "./pages/serviciosPage"; // ← Importar el nuevo componente
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
 
         {/* Página completa del ICIC */}
         <Route path="/icic" element={<icic />} />
+        <Route path="/servicios" element={<ServiciosPage />} />
       </Routes>
       <Footer />
     </>

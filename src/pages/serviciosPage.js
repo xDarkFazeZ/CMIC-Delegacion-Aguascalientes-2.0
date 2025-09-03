@@ -1,48 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { client } from '../sanity/sanityClient';
-import { urlFor } from '../utils/imageUtils';
-import "../css/servicios.css";
+import { client, urlFor } from '../lib/sanity';
+import "../css/servicios-page.css";
 
 const ServiciosPage = () => {
   const [servicios, setServicios] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchServicios = async () => {
       try {
         const query = `*[_type == "servicios"]{
           _id,
-          titulo,
-          descripcion,
+          nombre_maestria,
+          objetivo_itc,
+          requisitos,
+          mapa_curricular,
+          detalles_maestria,
           imagen
         }`;
         const data = await client.fetch(query);
         setServicios(data);
       } catch (error) {
         console.error("Error al cargar servicios:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchServicios();
   }, []);
 
+  if (loading) return <div className="loading">Cargando maestrías...</div>;
+
   return (
-    <section id="servicios" className="servicios-page">
-      <div className="contenedor">
-        <h2 className="seccion-titulo">Todos Nuestros Servicios</h2>
-        <div className="servicios-grid">
-          {servicios.map((s) => (
-            <div className="servicio-card" key={s._id}>
-              <div className="servicio-img">
-                <img src={urlFor(s.imagen).url()} alt={s.titulo} />
-              </div>
-              <div className="servicio-contenido">
-                <h3 className="servicio-titulo">{s.titulo}</h3>
-                <p className="servicio-texto">{s.descripcion}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="servicios-page">
+      <div className="servicios-header">
+        <h1>Maestrías ITC</h1>
+        <p>Programas de posgrado en partnership con el Instituto Tecnológico de la Construcción</p>
       </div>
-    </section>
+
+      <div className="servicios-container">
+        {servicios.map((servicio) => (
+          <div key={servicio._id} className="servicio-detalle-card">
+            {servicio.imagen && (
+              <img 
+                src={urlFor(servicio.imagen).width(600).url()} 
+                alt={servicio.nombre_maestria}
+                className="servicio-detalle-imagen"
+              />
+            )}
+            
+            <div className="servicio-detalle-contenido">
+              <h2>{servicio.nombre_maestria}</h2>
+              
+              {/* Resto del contenido igual */}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { client } from '../sanity/sanityClient';
-import { urlFor } from '../utils/imageUtils';
+import { client, urlFor } from '../lib/sanity'
 import '../css/carrusel.css';
 
 const Carrusel = () => {
