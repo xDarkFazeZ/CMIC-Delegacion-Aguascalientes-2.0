@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // 🔹 Importamos Link
+import { Link } from "react-router-dom";
 import "../css/header.css";
 import "../App.css";
 
-const logo = "/img/imagen2.png";
+// Opción recomendada: importar la imagen directamente
+import logoImage from "../lib/imagen2.png";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function Header() {
       {/* Logo */}
       <div className={`logo-container ${isOpen ? "hidden" : ""}`}>
         <Link to="/" onClick={handleLinkClick}>
-          <img src={logo} alt="Logo" className="logo" />
+          <img src={logoImage} alt="Logo" className="logo" />
         </Link>
       </div>
 
@@ -65,8 +66,8 @@ export default function Header() {
       {/* Menú de navegación */}
       <nav className={`nav-menu ${isOpen ? "active" : ""}`}>
         <div className="mobile-logo">
-          <Link to="/home" onClick={handleLinkClick}>
-            <img src={logo} alt="Logo" />
+          <Link to="/" onClick={handleLinkClick}>
+            <img src={logoImage} alt="Logo" />
           </Link>
         </div>
 

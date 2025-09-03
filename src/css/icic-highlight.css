@@ -1,4 +1,3 @@
-/* src/css/icic-highlight.css */
 :root {
     --transition: all 0.6s ease-in-out;
 }
@@ -346,7 +345,7 @@
     box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
 }
 
-/* Carrusel sin controles */
+/* ========== CARRUSEL CON TAMAÑO NATURAL ========== */
 .gallery-carousel {
     position: relative;
     border-radius: 20px;
@@ -356,9 +355,12 @@
 
 .carousel-container {
     position: relative;
-    height: 450px;
+    height: 500px; /* Aumentado para mejor visualización */
     overflow: hidden;
     border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-slide {
@@ -370,7 +372,9 @@
     opacity: 0;
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: scale(0.95);
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-slide.active {
@@ -380,20 +384,22 @@
 }
 
 .carousel-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Cambiado de cover a contain */
     border-radius: 12px;
     transition: transform 0.3s ease;
 }
 
 .carousel-slide:hover .carousel-image {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
-/* Sección de calendario mejorada */
+/* ========== CALENDARIO MEJORADO ========== */
 .calendar-section {
-    margin-top: -20px;
+    margin-top: 0;
     text-align: center;
     padding: 2rem;
     border-radius: 20px;
@@ -423,138 +429,36 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    cursor: pointer;
     transition: all 0.3s ease;
     max-width: 500px;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 1rem;
 }
 
 .calendar-preview:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .calendar-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Altura máxima reducida */
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-description {
-    color: black;
+    color: #495057;
     margin-top: 1rem;
     font-size: 1rem;
+    line-height: 1.5;
 }
 
-/* Modales mejorados */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 2rem;
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background: white;
-    border-radius: 20px;
-    max-width: 95vw;
-    max-height: 95vh;
-    overflow: auto;
-    position: relative;
-    padding: 3rem;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-}
-
-.modal-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: var(--colorPrincipal);
-    color: white;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1001;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-}
-
-.modal-close:hover {
-    background: var(--colorPrincipal);
-    transform: rotate(90deg);
-}
-
-.modal-image {
-    width: 100%;
-    height: auto;
-    max-height: 75vh;
-    object-fit: contain;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-}
-
-.modal-calendar-image {
-    width: 100%;
-    height: auto;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 12px;
-}
-
-.modal-info {
-    margin-top: 2rem;
-    text-align: center;
-    padding: 0 2rem;
-}
-
-.modal-info h3 {
-    color: #212529;
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.modal-info p {
-    color: #6c757d;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-.calendar-modal {
-    max-width: 900px;
-    padding: 2.5rem;
-}
-
-.calendar-modal .modal-info {
-    margin-top: 1.5rem;
-}
-
-.modal-title {
-    color: #212529;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
+/* Placeholder para galería */
 .gallery-placeholder {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -574,7 +478,7 @@
     100% { opacity: 0.6; }
 }
 
-/* Responsive */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
     .icic-grid {
         grid-template-columns: 1fr;
@@ -586,11 +490,15 @@
     }
     
     .carousel-container {
-        height: 400px;
+        height: 450px;
     }
     
     .calendar-preview {
         max-width: 400px;
+    }
+    
+    .calendar-image {
+        max-height: 280px;
     }
 }
 
@@ -620,7 +528,7 @@
     }
     
     .carousel-container {
-        height: 350px;
+        height: 380px;
     }
     
     .icic-logo {
@@ -630,17 +538,11 @@
     }
     
     .calendar-image {
-        height: 200px;
+        max-height: 250px;
     }
     
-    .modal-content {
-        padding: 2rem;
-        margin: 1rem;
-    }
-    
-    .modal-image,
-    .modal-calendar-image {
-        max-height: 65vh;
+    .calendar-preview {
+        max-width: 350px;
     }
 }
 
@@ -648,6 +550,7 @@
     .icic-logo{
         margin-top: -100px;
     }
+    
     .section-title {
         font-size: 1.9rem;
     }
@@ -657,7 +560,7 @@
     }
     
     .carousel-container {
-        height: 300px;
+        height: 320px;
     }
     
     .icic-logo {
@@ -674,21 +577,30 @@
     }
     
     .calendar-image {
-        height: 180px;
+        max-height: 220px;
     }
     
-    .modal-content {
-        padding: 1.5rem;
+    .calendar-preview {
+        max-width: 300px;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container {
+        height: 280px;
     }
     
-    .modal-close {
-        top: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
+    .calendar-image {
+        max-height: 200px;
     }
     
-    .modal-info h3 {
-        font-size: 1.5rem;
+    .calendar-preview {
+        max-width: 280px;
+    }
+    
+    .icic-logo {
+        width: 200px;
+        height: 200px;
     }
 }

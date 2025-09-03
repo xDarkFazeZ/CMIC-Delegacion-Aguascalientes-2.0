@@ -29,13 +29,13 @@
 
 /* ====== Logo ====== */
 .logo-container {
-    height: 60px;
+    height: 60px; /* Altura fija */
     z-index: 1001;
     transition: var(--transition);
 }
 
 .logo {
-    height: 90px;
+    height: 90px; /* Logo más alto que el contenedor */
     margin-top: 5px;
     transition: var(--transition);
     margin-left: -20px;
@@ -147,6 +147,55 @@
     height: 80px;
     max-width: 100%;
     transition: var(--transition);
+}
+
+/* ====== ANIMACIONES PARA SCROLL ====== */
+.header {
+    opacity: 1 !important; /* Forzar que siempre sea visible */
+    transform: translateY(0) !important;
+}
+
+/* Anulamos cualquier animación que pueda estar ocultando el header */
+.header.animate-in,
+.header.animate-out {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.logo-container {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.logo-container.animate-in,
+.logo-container.animate-out {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Aseguramos que el logo siempre sea visible */
+.logo {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Si quieres una animación de entrada suave para el header, puedes usar esto: */
+@keyframes headerSlideIn {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.header {
+    animation: headerSlideIn 0.5s ease-out;
+}
+
+/* Para el efecto de scroll */
+.header.scrolled {
+    animation: none; /* Desactivar la animación inicial cuando se hace scroll */
 }
 
 /* ====== Responsivo ====== */

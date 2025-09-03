@@ -1,4 +1,3 @@
-// src/components/IcicHighlight.js
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { client, urlFor } from '../lib/sanity'
@@ -8,8 +7,6 @@ const IcicHighlight = () => {
   const [icicImages, setIcicImages] = useState([]);
   const [calendarImage, setCalendarImage] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showCalendarModal, setShowCalendarModal] = useState(false);
   const navigate = useNavigate();
 
   // Refs para animaciones
@@ -25,19 +22,7 @@ const IcicHighlight = () => {
   const buttonRef = useRef(null);
   const calendarRef = useRef(null);
 
-  // Efecto para bloquear el scroll cuando los modales están abiertos
-  useEffect(() => {
-    if (selectedImage || showCalendarModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedImage, showCalendarModal]);
-
+  // Obtener datos
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,7 +54,7 @@ const IcicHighlight = () => {
     fetchData();
   }, []);
 
-  // Configurar Intersection Observer para animaciones
+  // Animaciones con IntersectionObserver
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -88,7 +73,6 @@ const IcicHighlight = () => {
       });
     }, observerOptions);
     
-    // Observar todos los elementos que queremos animar
     if (sectionRef.current) observer.observe(sectionRef.current);
     if (headerRef.current) observer.observe(headerRef.current);
     if (logoRef.current) observer.observe(logoRef.current);
@@ -107,11 +91,10 @@ const IcicHighlight = () => {
       if (feature) observer.observe(feature);
     });
     
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [icicImages, calendarImage]);
 
+  // Carrusel automático
   useEffect(() => {
     if (icicImages.length > 0) {
       const interval = setInterval(() => {
@@ -120,22 +103,6 @@ const IcicHighlight = () => {
       return () => clearInterval(interval);
     }
   }, [icicImages.length]);
-
-  const openImageModal = (image) => {
-    setSelectedImage(image);
-  };
-
-  const closeImageModal = () => {
-    setSelectedImage(null);
-  };
-
-  const openCalendarModal = () => {
-    setShowCalendarModal(true);
-  };
-
-  const closeCalendarModal = () => {
-    setShowCalendarModal(false);
-  };
 
   return (
     <section id="icic" className="icic-highlight" ref={sectionRef}>
@@ -220,7 +187,6 @@ const IcicHighlight = () => {
                     <div 
                       key={image._id} 
                       className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
-                      onClick={() => openImageModal(image)}
                     >
                       <img 
                         src={urlFor(image.imagen).url()} 
@@ -239,79 +205,26 @@ const IcicHighlight = () => {
               </div>
             )}
 
-            {/* Sección del Calendario Mejorada */}
             {calendarImage && (
               <div className="calendar-section" ref={calendarRef}>
                 <h4>Calendario de Cursos 2024</h4>
-                <div 
-                  className="calendar-preview"
-                  onClick={openCalendarModal}
-                >
+                <div className="calendar-preview">
                   <img 
                     src={urlFor(calendarImage.imagen).url()} 
                     alt={calendarImage.titulo || "Calendario de Cursos"} 
                     className="calendar-image"
                   />
                 </div>
-                <p className="calendar-description">
-                  Consulta nuestras fechas de cursos y programas de capacitación
-                </p>
+                {calendarImage.descripcion && (
+                  <p className="calendar-description">
+                    {calendarImage.descripcion}
+                  </p>
+                )}
               </div>
             )}
           </div>
         </div>
       </div>
-
-      {/* Modal para imágenes */}
-      {selectedImage && (
-        <div className="modal-overlay" onClick={closeImageModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeImageModal}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-            <img 
-              src={urlFor(selectedImage.imagen).url()} 
-              alt={selectedImage.titulo} 
-              className="modal-image"
-            />
-            <div className="modal-info">
-              <h3>{selectedImage.titulo}</h3>
-              {selectedImage.descripcion && <p>{selectedImage.descripcion}</p>}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modal para calendario */}
-      {showCalendarModal && calendarImage && (
-        <div className="modal-overlay" onClick={closeCalendarModal}>
-          <div className="modal-content calendar-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeCalendarModal}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-            <h3 className="modal-title">{calendarImage.titulo || "Calendario de Cursos 2024"}</h3>
-            <img 
-              src={urlFor(calendarImage.imagen).url()} 
-              alt={calendarImage.titulo || "Calendario de Cursos"} 
-              className="modal-calendar-image"
-            />
-            {calendarImage.descripcion && (
-              <div className="modal-info">
-                <p>{calendarImage.descripcion}</p>
-              </div>
-            )}
-            <div className="modal-actions">
-              <button className="cta-button" onClick={closeCalendarModal}>
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
