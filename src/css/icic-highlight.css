@@ -1,10 +1,105 @@
+/* Clase para contenido visualmente oculto pero accesible para lectores de pantalla */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mejoras de accesibilidad para reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .icic-highlight,
+  .icic-header,
+  .logo-container,
+  .section-title,
+  .section-subtitle,
+  .icic-info,
+  .icic-gallery,
+  .stat,
+  .feature-card,
+  .button-container,
+  .calendar-section,
+  .carousel-slide,
+  .carousel-image,
+  .cta-button {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .stat:hover,
+  .feature-card:hover,
+  .cta-button:hover,
+  .calendar-preview:hover {
+    transform: none !important;
+  }
+  
+  .carousel-container {
+    animation: none;
+  }
+}
+
+/* Mejora de contraste para accesibilidad */
+@media (prefers-contrast: high) {
+  .icic-highlight {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+  
+  .stat,
+  .feature-card {
+    border: 2px solid var(--colorPrincipal);
+  }
+  
+  .cta-button {
+    border: 2px solid white;
+  }
+}
+
+/* Modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  .icic-highlight {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+  
+  .icic-highlight::before {
+    background: rgba(13, 110, 253, 0.1);
+  }
+  
+  .stat,
+  .feature-card {
+    background: #2a2a2a;
+  }
+  
+  .section-subtitle,
+  .icic-description p,
+  .stat-label,
+  .feature-content p,
+  .calendar-description {
+    color: #cccccc;
+  }
+  
+  .feature-content h4 {
+    color: #ffffff;
+  }
+  
+  .gallery-placeholder .placeholder-image {
+    background: linear-gradient(90deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%);
+  }
+}
+
 :root {
     --transition: all 0.6s ease-in-out;
 }
 
 .icic-highlight {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: var(--colorFondo);
+    padding-bottom: 5px;
     position: relative;
     overflow: hidden;
     opacity: 0;
@@ -340,9 +435,11 @@
     transition: all 0.3s ease;
 }
 
-.cta-button:hover {
+.cta-button:hover,
+.cta-button:focus {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
+    outline: none;
 }
 
 /* ========== CARRUSEL CON TAMAÑO NATURAL ========== */
@@ -351,11 +448,12 @@
     border-radius: 20px;
     overflow: hidden;
     padding: 1.5rem;
+            margin-top: -50px;
 }
 
 .carousel-container {
     position: relative;
-    height: 500px; /* Aumentado para mejor visualización */
+    height: 500px;
     overflow: hidden;
     border-radius: 16px;
     display: flex;
@@ -388,7 +486,7 @@
     max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain; /* Cambiado de cover a contain */
+    object-fit: contain;
     border-radius: 12px;
     transition: transform 0.3s ease;
 }
@@ -419,6 +517,7 @@
 }
 
 .calendar-section h4 {
+    margin-top: -50px;
     color: #212529;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -434,7 +533,6 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    background: #f8f9fa;
     padding: 1rem;
 }
 
@@ -445,7 +543,7 @@
 .calendar-image {
     max-width: 100%;
     height: auto;
-    max-height: 300px; /* Altura máxima reducida */
+    max-height: 500px;
     object-fit: contain;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -476,6 +574,45 @@
     0% { opacity: 0.6; }
     50% { opacity: 1; }
     100% { opacity: 0.6; }
+}
+
+/* Estados de carga y error */
+.loading-container, .error-container {
+    padding: 3rem;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--colorPrincipal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.retry-btn {
+    background: var(--colorPrincipal);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: var(--transition);
+}
+
+.retry-btn:hover,
+.retry-btn:focus {
+    background: var(--colorSecundario);
+    outline: none;
 }
 
 /* ========== RESPONSIVE ========== */

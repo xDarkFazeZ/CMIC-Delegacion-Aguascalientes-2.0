@@ -1,362 +1,400 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 20px;
-    background: var(--colorPrincipal);
-    color: white;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    font-family: var(--titulos);
-    font-size: 1rem;
-    /* tamaño de letra estándar */
-    height: auto;
-    /* que se ajuste automáticamente */
-    transition: all 0.3s ease;
+  display: flex;
+  display: -webkit-box;
+  /* Safari viejos */
+  display: -ms-flexbox;
+  /* IE10+ */
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  background: var(--colorPrincipal);
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: var(--titulos);
+  font-size: 1rem;
+  /* tamaño de letra estándar */
+  height: auto;
+  /* que se ajuste automáticamente */
+  transition: all 0.3s ease;
 }
 
 /* Header cuando se hace scroll - FONDO OSCURO */
 .header.scrolled {
-    padding: 5px 20px;
-    background: var(--colorOscuro);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 5px 20px;
+  background: var(--colorOscuro);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* ====== Logo ====== */
 .logo-container {
-    height: 60px; /* Altura fija */
-    z-index: 1001;
-    transition: var(--transition);
+  height: 60px;
+  /* Altura fija */
+  z-index: 1001;
+  transition: var(--transition);
 }
 
 .logo {
-    height: 90px; /* Logo más alto que el contenedor */
-    margin-top: 5px;
-    transition: var(--transition);
-    margin-left: -20px;
+  height: 90px;
+  /* Logo más alto que el contenedor */
+  margin-top: 5px;
+  transition: var(--transition);
+  margin-left: -20px;
 }
 
 .header.scrolled .logo {
-    height: 90px;
-    margin-top: 5px;
+  height: 90px;
+  margin-top: 5px;
 }
 
 .logo-container.hidden {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* ====== Menú ====== */
 .nav-menu ul {
-    display: flex;
-    list-style: none;
-    gap: 25px;
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-menu ul li {
+  margin-right: 25px;
+}
+
+.nav-menu ul li:last-child {
+  margin-right: 0;
 }
 
 .nav-menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: var(--transition);
-    position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: var(--transition);
+  position: relative;
 }
 
 .nav-menu ul li a:hover {
-    background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-menu ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: #ffffff;
-    transition: var(--transition);
-    transform: translateX(-50%);
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: var(--transition);
+  transform: translateX(-50%);
 }
 
 .nav-menu ul li a:hover::after {
-    width: 80%;
+  width: 80%;
 }
 
 /* ====== Botón hamburguesa ====== */
 .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    padding: 5px;
-    z-index: 1001;
-    /* Por encima del menú móvil */
-    transition: var(--transition);
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  padding: 5px;
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  transition: var(--transition);
 }
 
 .hamburger:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
-    background: white;
-    border-radius: 5px;
-    transition: var(--transition);
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 5px;
+  transition: var(--transition);
 }
 
 /* Animación para el botón hamburguesa cuando está activo */
 .hamburger.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .hamburger.active .bar:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .hamburger.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Overlay para fondo oscuro al abrir menú móvil */
 .menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
 }
 
 /* Logo en el menú móvil */
 .mobile-logo {
-    display: none;
-    text-align: center;
-    margin-bottom: 30px;
+  display: none;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .mobile-logo img {
-    height: 80px;
-    max-width: 100%;
-    transition: var(--transition);
+  height: 80px;
+  max-width: 100%;
+  transition: var(--transition);
 }
 
 /* ====== ANIMACIONES PARA SCROLL ====== */
 .header {
-    opacity: 1 !important; /* Forzar que siempre sea visible */
-    transform: translateY(0) !important;
+  opacity: 1 !important;
+  /* Forzar que siempre sea visible */
+  transform: translateY(0) !important;
 }
 
 /* Anulamos cualquier animación que pueda estar ocultando el header */
 .header.animate-in,
 .header.animate-out {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .logo-container {
-    opacity: 1 !important;
-    transform: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .logo-container.animate-in,
 .logo-container.animate-out {
-    opacity: 1 !important;
-    transform: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Aseguramos que el logo siempre sea visible */
 .logo {
-    opacity: 1 !important;
-    visibility: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Si quieres una animación de entrada suave para el header, puedes usar esto: */
 @keyframes headerSlideIn {
-    from {
-        transform: translateY(-100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 .header {
-    animation: headerSlideIn 0.5s ease-out;
+  animation: headerSlideIn 0.5s ease-out;
 }
 
 /* Para el efecto de scroll */
 .header.scrolled {
-    animation: none; /* Desactivar la animación inicial cuando se hace scroll */
+  animation: none;
+  /* Desactivar la animación inicial cuando se hace scroll */
 }
 
 /* ====== Responsivo ====== */
 @media (max-width: 840px) {
-    .header {
-        height: auto;
-        padding: 5px 15px;
-    }
+  .header {
+    height: auto;
+    padding: 5px 15px;
+  }
 
-    .header.scrolled {
-        padding: 5px 15px;
+  .header.scrolled {
+    padding: 5px 15px;
 
-    }
+  }
 
-    .hamburger {
-        display: flex;
-    }
+  .hamburger {
+    display: flex;
+  }
 
-    .logo {
-        max-height: 115px;
-        margin-top: 5px;
-        margin-left: -16px;
-    }
+  .logo {
+    max-height: 115px;
+    margin-top: 5px;
+    margin-left: -16px;
+  }
 
-    .header.scrolled .logo {
-        margin-top: 5px;
-        max-height: 100px;
-    }
+  .header.scrolled .logo {
+    margin-top: 5px;
+    max-height: 100px;
+  }
 
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -300px;
-        /* Oculto por defecto */
-        width: 220px;
-        /* MENÚ MÁS PEQUEÑO - reducido de 280px */
-        height: 100vh;
-        background: var(--colorPrincipal);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-        /* Debajo del header pero encima del overlay */
-        transition: all 0.3s ease-in-out;
-        /* Transición para todas las propiedades */
-        display: flex;
-        flex-direction: column;
-        padding: 80px 15px 30px;
-        /* Padding reducido para menú más pequeño */
-        overflow-y: auto;
-    }
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Oculto por defecto */
+    width: 220px;
+    /* MENÚ MÁS PEQUEÑO - reducido de 280px */
+    height: 100vh;
+    background: var(--colorPrincipal);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    /* Debajo del header pero encima del overlay */
+    transition: all 0.3s ease-in-out;
+    /* Transición para todas las propiedades */
+    display: flex;
+    flex-direction: column;
+    padding: 80px 15px 30px;
+    /* Padding reducido para menú más pequeño */
+    overflow-y: auto;
+  }
 
-    .nav-menu.active {
-        right: 0;
-        /* Mostrado cuando está activo */
-        /* width: 60%; Eliminado - ya no necesitamos esto */
-    }
+  .nav-menu.active {
+    right: 0;
+    /* Mostrado cuando está activo */
+    /* width: 60%; Eliminado - ya no necesitamos esto */
+  }
 
-    .nav-menu ul {
-        flex-direction: column;
-        gap: 12px;
-        /* Espacio reducido entre elementos */
-        text-align: center;
-        width: 100%;
-    }
+  .nav-menu ul li {
+    margin-right: 0;
+    /* Quitar margen horizontal */
+    margin-bottom: 10px;
+    /* Espacio uniforme entre links */
+  }
 
-    .nav-menu ul li a {
-        display: block;
-        padding: 12px;
-        /* Padding reducido */
-        font-size: 20px;
-        /* Tamaño de fuente reducido */
-        border-radius: 4px;
-        transition: var(--transition);
-        text-align: center;
+  .nav-menu ul li:last-child {
+    margin-bottom: 0;
+    /* Quitar el espacio extra al final */
+  }
 
-    }
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+    /* Centrar todos los enlaces */
+    gap: 0;
+    /* eliminamos el gap porque ya usamos margin-bottom */
+  }
 
-    .nav-menu ul li a:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: none;
-    }
+  .nav-menu ul li a {
+    display: block;
+    padding: 12px;
+    /* Padding reducido */
+    font-size: 20px;
+    /* Tamaño de fuente reducido */
+    border-radius: 4px;
+    transition: var(--transition);
+    text-align: center;
 
-    .nav-menu ul li a::after {
-        display: none;
-    }
+  }
 
-    /* Mostrar logo en el menú móvil */
-    .mobile-logo {
-        display: block;
-        transform: scale(1.5);
-        /* Logo más pequeño en el menú móvil */
-        margin-bottom: 20px;
-        /* Menos espacio debajo del logo */
+  .nav-menu ul li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: none;
+  }
 
-    }
+  .nav-menu ul li a::after {
+    display: none;
+  }
+
+  /* Mostrar logo en el menú móvil */
+  .mobile-logo {
+    display: block;
+    transform: scale(1.5);
+    /* Logo más pequeño en el menú móvil */
+    margin-bottom: 20px;
+    /* Menos espacio debajo del logo */
+
+  }
 }
 
 /* Para pantallas muy pequeñas */
 @media (max-width: 400px) {
-    .nav-menu {
-        width: 45%;
-        right: -75%;
-    }
+  .nav-menu {
+    width: 45%;
+    right: -75%;
+  }
 
-    .header {
-        height: auto;
-        padding: 5px 15px;
-        }
+  .header {
+    height: auto;
+    padding: 5px 15px;
+  }
 
-    .header.scrolled {
-        padding: 5px 15px;
-        background: var(--colorOscuro);
-        /* Fondo oscuro */
+  .header.scrolled {
+    padding: 5px 15px;
+    background: var(--colorOscuro);
+    /* Fondo oscuro */
 
-    }
+  }
 
-    .logo {
-        max-height: 150px;
-        margin-left: -20px;
-        margin-top: 1px;
-        
-    }
+  .logo {
+    max-height: 150px;
+    margin-left: -20px;
+    margin-top: 1px;
 
-    .header.scrolled .logo {
-        max-height: 150px;
-        margin-top: 1px;
-    }
+  }
 
-    .nav-menu {
-        padding: 70px 10px 20px;
-        /* Padding aún más reducido */
-    }
+  .header.scrolled .logo {
+    max-height: 150px;
+    margin-top: 1px;
+  }
 
-    .nav-menu ul li a {
-        padding: 10px;
-        font-size: 20px;
-        /* Tamaño de fuente reducido */
-    }
+  .nav-menu {
+    padding: 70px 10px 20px;
+    /* Padding aún más reducido */
+  }
 
-    .mobile-logo img {
-        height: 70px;
-        /* Logo más pequeño en móviles muy pequeños */
-    }
+  .nav-menu ul li a {
+    padding: 10px;
+    font-size: 20px;
+    /* Tamaño de fuente reducido */
+  }
+
+  .mobile-logo img {
+    height: 70px;
+    /* Logo más pequeño en móviles muy pequeños */
+  }
 }
 
 /* Añadir padding al body para compensar el header fijo */
 body {
-    padding-top: 90px;
+  padding-top: 90px;
 }
 
 @media (max-width: 840px) {
-    body {
-        padding-top: 80px;
-    }
+  body {
+    padding-top: 80px;
+  }
 }
 
 .header.scrolled~body {
-    padding-top: 74px;
+  padding-top: 74px;
 }
 
 @media (max-width: 840px) {
-    .header.scrolled~body {
-        padding-top: 68px;
-    }
+  .header.scrolled~body {
+    padding-top: 68px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }

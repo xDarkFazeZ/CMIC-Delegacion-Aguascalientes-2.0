@@ -3,48 +3,32 @@ import { Link } from "react-router-dom";
 import "../css/header.css";
 import "../App.css";
 
-// Opción recomendada: importar la imagen directamente
+// Importar la imagen directamente
 import logoImage from "../lib/imagen2.png";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 840);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleLinkClick = () => {
     if (isOpen) setIsOpen(false);
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth <= 840;
-      setIsMobile(mobile);
-      if (!mobile && isOpen) setIsOpen(false);
-    };
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isOpen]);
+  }, []);
 
   return (
-    <header
-      className={`header ${isScrolled ? "scrolled" : ""} ${
-        isOpen && isMobile ? "menu-open" : ""
-      }`}
-    >
+    <header className={`header ${isScrolled ? "scrolled" : ""} ${isOpen ? "menu-open" : ""}`}>
       {/* Logo */}
       <div className={`logo-container ${isOpen ? "hidden" : ""}`}>
         <Link to="/" onClick={handleLinkClick}>
@@ -52,19 +36,26 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* Botón hamburguesa */}
-      <div
+      {/* Botón hamburguesa accesible */}
+      <button
         className={`hamburger ${isOpen ? "active" : ""}`}
         onClick={toggleMenu}
-        aria-label="Menú de navegación"
+        aria-label="Abrir menú de navegación"
+        aria-expanded={isOpen}
+        aria-controls="nav-menu"
       >
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
-      </div>
+      </button>
 
       {/* Menú de navegación */}
-      <nav className={`nav-menu ${isOpen ? "active" : ""}`}>
+      <nav
+        id="nav-menu"
+        className={`nav-menu ${isOpen ? "active" : ""}`}
+        role="navigation"
+        aria-hidden={isOpen ? "false" : undefined} 
+      >
         <div className="mobile-logo">
           <Link to="/" onClick={handleLinkClick}>
             <img src={logoImage} alt="Logo" />
@@ -73,32 +64,22 @@ export default function Header() {
 
         <ul>
           <li>
-            <Link to="/" onClick={handleLinkClick}>
-              Inicio
-            </Link>
+            <Link to="/" onClick={handleLinkClick}>Inicio</Link>
           </li>
           <li>
-            <Link to="/serviciosPage" onClick={handleLinkClick}>
-              Servicios
-            </Link>
+            <Link to="/serviciosPage" onClick={handleLinkClick}>Servicios</Link>
           </li>
           <li>
-            <Link to="/nosotros" onClick={handleLinkClick}>
-              Nosotros
-            </Link>
+            <Link to="/nosotros" onClick={handleLinkClick}>Nosotros</Link>
           </li>
           <li>
-            <Link to="/contacto" onClick={handleLinkClick}>
-              Contacto
-            </Link>
+            <Link to="/contacto" onClick={handleLinkClick}>Contacto</Link>
           </li>
         </ul>
       </nav>
 
       {/* Overlay */}
-      {isOpen && isMobile && (
-        <div className="menu-overlay" onClick={toggleMenu}></div>
-      )}
+      {isOpen && <div className="menu-overlay" onClick={toggleMenu}></div>}
     </header>
   );
 }

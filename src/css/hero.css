@@ -1,86 +1,91 @@
 .hero {
-    margin-top: -20px; /* altura mínima a pantalla completa */
-    min-height: 0vh;
-    height: auto;
+    margin-top: -20px;
+    min-height: 60vh; /* 🔹 En lugar de 100vh */
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
-    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85));
+    padding: 3rem 1.5rem;
+    background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        no-repeat center/cover;
+    background-blend-mode: darken;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 
-.hero-titulo {
-    font-size: 4rem;
-    margin: 0;
-    color: white;
-}
 .hero-contenido {
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.hero-titulo {
+    font-size: 3.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
 .hero-subtitulo {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     max-width: 600px;
     margin-top: 1rem;
-    color: #f0f0f0;
-    margin-bottom: 10px;
-}
-.boton,
-.boton-hero {
-    display: inline-block;
-    background-color: var(--colorPrincipal);
-    color: white;
-    padding: 1.2rem 2.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-family: var(--titulos);
-    font-weight: 600;
-    margin-top: 2rem;
-}
-
-.boton:hover,
-.boton-hero:hover {
-    background-color: var(--colorFondo);
-    color: #f0f0f0;
-      transform: translateY(-2px);
-
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+    line-height: 1.4;
 }
 
 /* --- Ajustes responsivos --- */
 @media (max-width: 840px) {
     .hero {
-        min-height: auto;  /* ya no fuerza 100vh */
-        padding: 4rem 2rem; /* respira mejor en móvil */
+        min-height: 50vh; /* 🔹 Menos espacio en tablets */
+        padding: 2.5rem 1.5rem;
     }
 
     .hero-titulo {
-        font-size: 2.5rem;
-        margin-top: 0;  /* quita el -25rem */
+        font-size: 2.2rem;
     }
 
-    .hero-texto {
-        font-size: 1.2rem;
+    .hero-subtitulo {
+        font-size: 1.1rem;
     }
 }
-/* Para pantallas muy pequeñas */
+
 @media (max-width: 400px) {
     .hero {
-        min-height: auto;  /* ya no fuerza 100vh */
-        padding: 4rem 2rem; /* respira mejor en móvil */
+        min-height: 45vh; /* 🔹 Compacto en móviles */
+        padding: 2rem 1rem;
     }
-        .hero-titulo {
-        font-size: 2.5rem;
-        margin-top: 0;  /* quita el -25rem */
+
+    .hero-titulo {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitulo {
+        font-size: 1rem;
+    }
+}
+
+
+/* Animación ligera */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Accesibilidad: reduce animación si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+    .hero-contenido {
+        animation: none;
+    }
+
+    .boton {
+        transition: none;
     }
 }

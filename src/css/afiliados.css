@@ -78,27 +78,42 @@
   transform: translateY(20px);
 }
 
-.logos img {
-  width: 120px;
-  height: auto;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease, transform 0.3s ease;
+/* CONTENEDOR PARA CADA LOGO - SIN FONDO */
+.logo-item {
+  width: 150px; /* Tamaño fijo para el contenedor */
+  height: 100px; /* Altura fija para el contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
   opacity: 0;
   transform: scale(0.8) translateY(20px);
-  transition: all 0.6s ease-in-out;
 }
 
-.logos img.animate-in {
+.logo-item.animate-in {
   opacity: 1;
   transform: scale(1) translateY(0);
 }
 
-.logos img.animate-out {
+.logo-item.animate-out {
   opacity: 0;
   transform: scale(0.8) translateY(20px);
 }
 
-.logos img:hover {
+/* ESTILOS PARA LAS IMÁGENES - Tamaño uniforme */
+.logo-item img {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: 100%; /* Ocupa toda la altura del contenedor */
+  object-fit: contain; /* Mantiene proporciones sin distorsionar */
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.logo-item:hover {
+  transform: translateY(-5px);
+}
+
+.logo-item:hover img {
   filter: grayscale(0%);
   transform: scale(1.05);
 }
@@ -106,7 +121,7 @@
 .btn-nosotros {
   padding: 0.8rem 1.5rem;
   border: none;
-  background: #222;
+  background: var(--colorPrincipal);
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -128,50 +143,60 @@
 }
 
 .btn-nosotros:hover {
-  background: #444;
-  transform: translateY(-2px);
+  background: var(--colorSecundario);
+  transform: translateY(-20px);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
+  .logo-item img {
+    filter: none !important;
+  }
+
   .afiliados {
     padding: 3rem 1.5rem;
   }
-  
+
   .afiliados h2 {
     font-size: 1.8rem;
   }
-  
+
   .afiliados p {
     font-size: 1rem;
   }
-  
+
   .logos {
     gap: 1.5rem;
   }
-  
-  .logos img {
-    width: 100px;
+
+  .logo-item {
+    width: 120px;
+    height: 80px;
   }
 }
 
 @media (max-width: 480px) {
+  .logo-item img {
+    filter: none !important;
+  }
+
   .afiliados {
     padding: 2rem 1rem;
   }
-  
+
   .afiliados h2 {
     font-size: 1.6rem;
   }
-  
+
   .logos {
     gap: 1rem;
   }
-  
-  .logos img {
-    width: 80px;
+
+  .logo-item {
+    width: 100px;
+    height: 70px;
   }
-  
+
   .btn-nosotros {
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;

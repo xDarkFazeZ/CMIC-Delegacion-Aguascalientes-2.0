@@ -1,16 +1,70 @@
-/* Usando tus variables definidas */
-:root {
-    --titulos: "Montserrat", sans-serif;
-    --subtitulos: "Roboto", sans-serif;
-    --texto: "Work Sans", sans-serif;
-    --colorPrincipal: #720000;
-    --colorSecundario: #5a0000;
-    --colorFondo: #F5F5F5;
-    --colorTitulo: #222222;
-    --colorTexto: #444444;
-    --transition: all 0.6s ease-in-out;
-    --colorOscuro: #2a0000;
-    --colorOscuroMenu: #1a0000;
+/* Clase para contenido visualmente oculto pero accesible para lectores de pantalla */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mejoras de accesibilidad para reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .courses-section,
+  .section-title,
+  .section-subtitle,
+  .logo-container,
+  .course-card,
+  .see-more,
+  .info-btn,
+  .more-courses-btn,
+  .course-image img {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .course-card:hover {
+    transform: none !important;
+  }
+}
+
+/* Mejora de contraste para accesibilidad */
+@media (prefers-contrast: high) {
+  .course-card {
+    border: 2px solid var(--colorPrincipal);
+  }
+  
+  .info-btn {
+    border: 2px solid white;
+  }
+  
+  .more-courses-btn {
+    border-width: 3px;
+  }
+}
+
+/* Modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  .courses-section {
+    background: #1a1a1a;
+  }
+  
+  .course-card {
+    background: #2a2a2a;
+  }
+  
+  .course-info h3,
+  .requirements-title {
+    color: #ffffff;
+  }
+  
+  .course-description,
+  .course-info ul li {
+    color: #cccccc;
+  }
 }
 
 /* Estilos generales de la sección */
@@ -151,6 +205,11 @@
   box-shadow: 0 8px 16px rgba(0,0,0,0.12);
 }
 
+.course-card:focus-within {
+  outline: 2px solid var(--colorPrincipal);
+  outline-offset: 2px;
+}
+
 /* Imagen del curso */
 .course-image {
   position: relative;
@@ -208,7 +267,7 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 63px; /* Aproximadamente 3 líneas de texto */
+  min-height: 63px;
   font-family: var(--texto);
 }
 
@@ -269,9 +328,11 @@
   text-align: center;
 }
 
-.info-btn:hover {
+.info-btn:hover,
+.info-btn:focus {
   background: var(--colorSecundario);
   transform: translateY(-2px);
+  outline: none;
 }
 
 /* Ver más */
@@ -305,10 +366,12 @@
   font-family: var(--subtitulos);
 }
 
-.more-courses-btn:hover {
+.more-courses-btn:hover,
+.more-courses-btn:focus {
   background: var(--colorPrincipal);
   color: white;
   transform: translateY(-2px);
+  outline: none;
 }
 
 /* Estados de carga y error */
@@ -346,8 +409,10 @@
   font-family: var(--subtitulos);
 }
 
-.retry-btn:hover {
+.retry-btn:hover,
+.retry-btn:focus {
   background: var(--colorSecundario);
+  outline: none;
 }
 
 /* Responsive */
@@ -372,7 +437,6 @@
     max-width: 600px;
   }
   
-  /* Asegurar que la tercera tarjeta ocupe el espacio completo en móviles */
   .courses-grid-three .course-card:nth-child(3) {
     grid-column: 1 / -1;
     max-width: 400px;
