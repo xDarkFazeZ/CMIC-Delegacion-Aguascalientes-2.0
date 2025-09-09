@@ -73,17 +73,25 @@ const Nosotros = () => {
 
         {/* Panel 2: Misión, Visión y Objetivos */}
         <div ref={mvRef} className="panel panel-mv">
-          <h2>Nuestros Principios</h2>
+          <h2 className="panel-title">Nuestros Principios</h2>
           <div className="valores-container">
             <div className="valor-card">
               <h3>Misión</h3>
-              <p>Representar, promover y defender los intereses de las empresas de la construcción.</p>
+              <p>Agrupar y organizar a los empresarios de la construcción, representando sus intereses, fomentando su productividad, apoyando su crecimiento y contribuyendo con responsabilidad al desarrollo y competitividad del país</p>
             </div>
 
-            <div className="valor-card">
+            <div className="valor-card valor-card-vision">
               <h3>Visión</h3>
-              <p>Ser la organización líder que impulse una construcción innovadora y sustentable.</p>
+              <div className="vision-section">
+                <p className="vision-parrafo">
+                  <strong>Hacia el exterior:</strong> Desarrollar oportunidades y fomentar la inversión, proponiendo cambios regulatorios; proporcionar conocimiento del mercado con servicios especializados; definir la estructura del sector; facilitar la integración de cadenas productivas de financiamiento.
+                </p>
+                <p className="vision-parrafo">
+                  <strong>Hacia el interior:</strong> Redimensionar la estructura administrativa, con mejora de servicios; institucionalizar con buena imagen y comunicación; y reforzar la presencia del sector ante clientes y oportunidades.
+                </p>
+              </div>
             </div>
+
 
             <div className="valor-card">
               <h3>Objetivos</h3>

@@ -73,7 +73,10 @@ export default function Header() {
             <Link to="/nosotros" onClick={handleLinkClick}>Nosotros</Link>
           </li>
           <li>
-            <Link to="/contacto" onClick={handleLinkClick}>Contacto</Link>
+            <Link to="/icic" onClick={handleLinkClick}>ICIC</Link>
+          </li>
+          <li>
+            <Link to="/itc" onClick={handleLinkClick}>ITC</Link>
           </li>
         </ul>
       </nav>

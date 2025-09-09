@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./components/header";
 import Hero from "./components/hero";
-import Servicios from "./components/servicios";
+import ItcHighlight from "./components/itc-highlight";
 import Afiliados from "./components/afiliados";
 import IcicHighlight from "./components/icic-highlight"; 
 import Footer from "./components/footer";
-import ServiciosPage from "./pages/serviciosPage"; 
-import Nosotros from "./pages/nosotros"; // 👈 Importar tu página Nosotros
+import Itc from "./pages/itc"; //
+import Nosotros from "./pages/nosotros"; //
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
             <>
               <Hero />
               <Afiliados />
-              <Servicios />
+              <ItcHighlight/>
               <IcicHighlight />
             </>
           }
@@ -29,7 +29,7 @@ const App = () => {
 
         {/* Otras páginas */}
         <Route path="/icic" element={<icic />} />
-        <Route path="/serviciosPage" element={<ServiciosPage />} /> 
+        <Route path="/itc" element={<Itc />} />
         <Route path="/nosotros" element={<Nosotros />} /> {/* 👈 Aquí agregamos la ruta */}
       </Routes>
       <Footer />

@@ -1,4 +1,4 @@
-/* Clase para contenido visualmente oculto pero accesible para lectores de pantalla */
+/*Clase que se conecta con ICIC-highlight.js para mostrarse en la pagina principal*/
 .visually-hidden {
   position: absolute;
   width: 1px;

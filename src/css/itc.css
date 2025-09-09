@@ -1,0 +1,177 @@
+/* PAGINA INDEPENDIENTE DE ITC */
+.servicios-page {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servicios-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.servicios-header h1 {
+  color: #2c3e50;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.servicios-header p {
+  color: #555;
+  font-size: 1.15rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.imagen-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.itc-logo {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+/* GRID DE MAESTRÍAS */
+.servicios-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+/* FLIP CARD */
+.flip-card {
+  background: transparent;
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 420px; /* más alta que ancha */
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Frente y reverso */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* vertical */
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+/* Frente */
+.flip-card-front {
+  background: #fff;
+  display: flex;
+  flex-direction: column; /* opcional: si quieres imagen arriba y título abajo */
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: auto;   /* la imagen se adapta al contenedor */
+  max-height: 250px; /* límite para que no se deforme */
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.flip-card-front h2 {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+}
+/* Reverso */
+.flip-card-back {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  transform: rotateY(180deg);
+  text-align: left;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column; /* aquí sí lo necesitamos */
+}
+
+.contenido-scroll {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.contenido-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contenido-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.contenido-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.flip-card-back h3 {
+  margin: 1rem 0 0.5rem;
+  color: #34495e;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.flip-card-back p,
+.flip-card-back li {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.flip-card-back ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+  .servicios-container {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card-inner {
+    height: 460px; /* un poco más alta en móvil */
+  }
+}

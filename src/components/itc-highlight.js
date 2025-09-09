@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { client } from "../lib/sanity";
 import { useNavigate } from "react-router-dom";
-import "../css/servicios.css";
+import "../css/itc-highlight.css";
 
 // Importar la imagen directamente
-import icicLogo from "../lib/itc-logo.jpg";
+import itcLogo from "../lib/itc-logo.jpg";
 
 // Componente para manejar errores de imagen
 const ImageWithFallback = ({ src, alt, className, onError, ...props }) => {
@@ -60,7 +60,7 @@ const Servicios = () => {
     const fetchCourses = async () => {
       try {
         setLoading(true);
-        const query = `*[_type == "servicios"] | order(_createdAt desc)[0...3]{
+        const query = `*[_type == "maestrias"] | order(_createdAt desc)[0...3]{
           _id,
           nombre_maestria,
           requisitos,
@@ -182,9 +182,9 @@ const Servicios = () => {
     >
       <div className="logo-container" ref={logoRef}>
         <ImageWithFallback
-          src={icicLogo}
+          src={itcLogo}
           alt="Logo ITC"
-          className="itc-logo"
+          className="itcLogo"
           onError={() => console.log('Error cargando logo')}
         />
       </div>

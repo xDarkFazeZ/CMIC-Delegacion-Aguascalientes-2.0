@@ -1,4 +1,4 @@
-:root{
+:root {
   --titulos: "Montserrat", sans-serif;
   --subtitulos: "Roboto", sans-serif;
   --texto: "Work Sans", sans-serif;
@@ -11,37 +11,39 @@
 }
 
 /* Contenedor general */
-.nosotros-container{
+.nosotros-container {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: -25px;
 }
 
 /* Wrapper de secciones */
-.nosotros-section{
+.nosotros-section {
   display: block;
 }
 
 /* Panel base */
-.panel{
+.panel {
   overflow: hidden;
 }
 
 /* === Animación de fade + slide === */
-.fade-in-slide{
+.fade-in-slide {
   opacity: 1 !important;
   transform: translateY(0) !important;
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* Panel Nosotros */
-.panel-nosotros{
+.panel-nosotros {
   opacity: 0;
   transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* grid interno */
-.nosotros-grid{
+.nosotros-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -49,7 +51,7 @@
 }
 
 /* Texto principal */
-.nosotros-texto h1{
+.nosotros-texto h1 {
   font-size: 2.8rem;
   color: var(--colorPrincipal);
   margin-bottom: 1rem;
@@ -57,7 +59,7 @@
   position: relative;
 }
 
-.nosotros-texto h1::after{
+.nosotros-texto h1::after {
   content: "";
   display: block;
   width: 80px;
@@ -67,7 +69,7 @@
   border-radius: 2px;
 }
 
-.nosotros-texto p{
+.nosotros-texto p {
   font-size: 1.05rem;
   color: var(--colorTexto);
   line-height: 1.8;
@@ -75,12 +77,12 @@
 }
 
 /* Imagen */
-.nosotros-imagen{
+.nosotros-imagen {
   display: flex;
   justify-content: center;
 }
 
-.nosotros-imagen img{
+.nosotros-imagen img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -88,35 +90,35 @@
   transition: transform 0.35s ease;
 }
 
-.nosotros-imagen img:hover{
+.nosotros-imagen img:hover {
   transform: scale(1.03);
 }
 
 /* Nuestro trabajo */
-.nuestro-trabajo{
+.nuestro-trabajo {
   margin-top: -2.5rem;
   padding: 1.5rem 0 2rem 0;
 }
 
-.nuestro-trabajo h2{
+.nuestro-trabajo h2 {
   font-size: 1.6rem;
   color: var(--colorTitulo);
   margin-bottom: 1rem;
 }
 
-.nosotros-lista{
+.nosotros-lista {
   list-style: none;
   padding-left: 1.6rem;
   margin-bottom: 1rem;
 }
 
-.nosotros-lista li{
+.nosotros-lista li {
   margin-bottom: 0.9rem;
   position: relative;
   font-size: 1.02rem;
 }
 
-.nosotros-lista li::before{
+.nosotros-lista li::before {
   content: "✔";
   color: var(--colorPrincipal);
   position: absolute;
@@ -124,14 +126,14 @@
   font-size: 1rem;
 }
 
-.mensaje-final{
+.mensaje-final {
   font-weight: 600;
   color: var(--colorTitulo);
   margin-top: 1rem;
 }
 
 /* Panel Misión/Visión/Objetivos */
-.panel-mv{
+.panel-mv {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -139,66 +141,128 @@
 }
 
 /* Valores / tarjetas */
-.valores-container{
+.valores-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-.valor-card{
-  background: #f9f9f9;
+/* Tarjeta base */
+.valor-card {
+  background: #ffffff; /* fondo blanco */
   padding: 1.8rem;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f2f2f2;
 }
 
-.valor-card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+.valor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
 }
 
-.valor-card h3{
-  font-size: 1.25rem;
+.valor-card h3 {
+  font-size: 1.5rem;
   color: var(--colorPrincipal);
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   font-family: var(--titulos);
-  border-bottom: 2px solid var(--colorSecundario);
-  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--colorSecundario);
+  padding-bottom: 0.5rem;
 }
 
 .valor-card p,
-.valor-card li{
+.valor-card li {
   color: var(--colorTexto);
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1rem;
+  text-align: justify;
 }
 
-.valor-card ul{
-  padding-left: 1.1rem;
+.valor-card ul {
+  padding-left: 1.2rem;
 }
 
-.valor-card li{
-  margin-bottom: 0.45rem;
+.valor-card li {
+  margin-bottom: 0.5rem;
+}
+
+/* Párrafos de visión */
+.valor-card-vision .vision-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.valor-card-vision .vision-parrafo {
+  color: #444444;
+  line-height: 1.7;
+  font-size: 1rem;
+  text-align: justify;
+  padding-left: 0.5rem;
+  border-left: 4px solid #720000;
+}
+
+@media (max-width: 1050px) {
+    .nuestro-trabajo{
+    margin-top: 1rem;
+  }
 }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .valor-card { padding: 1.4rem; }
+  .valor-card {
+    padding: 1.4rem;
+  }
 }
 
 @media (max-width: 900px) {
-  .valores-container { grid-template-columns: 1fr; gap: 1rem; }
-  .nuestro-trabajo { margin-top: 1rem; }
+  .valores-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .nuestro-trabajo {
+    margin-top: 1rem;
+  }
+    .panel-title {
+      margin-top: -20px;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 810px) {
-  .nosotros-grid { grid-template-columns: 1fr; text-align: center; }
-  .nuestro-trabajo { margin-top: 1rem; }
-  .valor-card { padding: 1.2rem; }
+  .nosotros-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nuestro-trabajo {
+    margin-top: -3rem;
+  }
+
+  .panel-title {
+      margin-top: -20px;
+    margin-bottom: 1rem;
+  }
+
+  .valor-card {
+    padding: 1.2rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .nosotros-grid { grid-template-columns: 1fr; text-align: center; }
-  .nuestro-trabajo { margin-top: 1rem; }
-  .valor-card { padding: 1.2rem; }
+  .nosotros-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nuestro-trabajo {
+      margin-top: -20px;
+    margin-bottom: 1rem;
+  }
+
+  .valor-card {
+    padding: 1.2rem;
+  }
 }

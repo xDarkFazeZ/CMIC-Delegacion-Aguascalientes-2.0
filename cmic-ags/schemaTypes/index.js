@@ -1,9 +1,9 @@
 import noticia from './noticias'
-import servicio from './servicios'
+import maestrias from './maestrias'
 import carrusel from './carrusel'
 import afiliados from './afiliados'
 import icicGallery from './icicGallery'
 import calendario from './calendarios'
 
 
-export const schemaTypes = [noticia, servicio, carrusel, afiliados, icicGallery, calendario]
+export const schemaTypes = [noticia, maestrias, carrusel, afiliados, icicGallery, calendario]
