@@ -133,9 +133,9 @@ const Servicios = () => {
 
   const handleCourseClick = useCallback((course) => {
     if (course.slug?.current) {
-      navigate(`/servicios/${course.slug.current}`);
+      navigate(`/itc/${course.slug.current}`);
     } else {
-      navigate("/serviciosPage");
+      navigate("/itc");
     }
   }, [navigate]);
 
@@ -258,7 +258,7 @@ const Servicios = () => {
       <div className="see-more" ref={buttonRef}>
         <button
           className="more-courses-btn"
-          onClick={() => navigate("/serviciosPage")}
+          onClick={() => navigate("/itc")}
           aria-label="Ver todos los programas disponibles"
         >
           Ver todos los programas

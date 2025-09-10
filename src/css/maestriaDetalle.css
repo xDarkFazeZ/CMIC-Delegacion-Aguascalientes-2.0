@@ -1,0 +1,338 @@
+/* maestriaDetalle.css */
+.maestria-detalle-grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  font-family: var(--texto);
+  color: var(--colorTexto);
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+/* HERO SECTION */
+.grid-hero {
+  grid-column: 1 / -1;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: start;
+  gap: 3rem;
+}
+
+.hero-columna-izquierda {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.hero-texto {
+  text-align: left;
+}
+
+.hero-texto h1 {
+  font-family: var(--titulos);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--colorOscuro);
+  margin-bottom: 1.2rem;
+}
+
+.objetivo-text {
+  font-size: 1.15rem;
+  color: #444;
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+/* DETALLES DENTRO DEL HERO */
+.detalles-hero {
+  background: #fafafa;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.detalles-hero:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.detalles-hero h2 {
+  font-size: 1.6rem;
+  font-family: var(--subtitulos);
+  font-weight: 700;
+  color: var(--colorPrincipal);
+  margin-bottom: 1.5rem;
+}
+
+.detalles-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.detalle-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.detalle-icono {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.detalle-contenido h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: var(--colorOscuro);
+}
+
+.detalle-contenido p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--colorTexto);
+}
+
+/* IMAGEN */
+.hero-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero-imagen img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  transition: var(--transition);
+}
+
+.hero-imagen img:hover {
+  transform: scale(1.02);
+}
+
+/* REQUISITOS EXTENDIDOS */
+.requisitos-extendidos {
+  grid-column: 1 / -1;
+  background: #fafafa;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.requisitos-extendidos:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.requisitos-contenedor h2 {
+  font-size: 1.6rem;
+  font-family: var(--subtitulos);
+  font-weight: 700;
+  color: var(--colorPrincipal);
+  margin-bottom: 1.5rem;
+}
+
+.requisitos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.requisito-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.requisito-marcador {
+  width: 8px;
+  height: 8px;
+  background: var(--colorPrincipal);
+  border-radius: 50%;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.requisito-item p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--colorTexto);
+}
+
+/* MAPA CURRICULAR SECTION */
+.grid-mapa {
+  grid-column: 1 / -1;
+  background: #fafafa;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.grid-mapa:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.grid-mapa h2 {
+  font-size: 1.6rem;
+  font-family: var(--subtitulos);
+  font-weight: 700;
+  color: var(--colorPrincipal);
+  margin-bottom: 1.2rem;
+}
+
+.semestres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.semestre-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.semestre-card:hover {
+  transform: scale(1.02);
+}
+
+.semestre-card h3 {
+  font-size: 1.3rem;
+  color: var(--colorOscuro);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.6rem;
+  font-family: var(--subtitulos);
+}
+
+.semestre-card ul {
+  list-style: none;
+}
+
+.semestre-card li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--colorTexto);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.semestre-card li::before {
+  content: "•";
+  color: var(--colorPrincipal);
+  position: absolute;
+  left: 0;
+}
+
+.semestre-card li:last-child {
+  border-bottom: none;
+}
+
+/* CTA SECTION */
+.grid-cta {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: #fafafa;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.grid-cta h2 {
+  font-size: 1.8rem;
+  font-family: var(--subtitulos);
+  font-weight: 700;
+  color: var(--colorOscuro);
+  margin-bottom: 1rem;
+}
+
+.grid-cta p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.grid-cta button {
+  background: linear-gradient(135deg, var(--colorPrincipal), var(--colorSecundario));
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+}
+
+.grid-cta button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-columna-izquierda {
+    order: 2;
+  }
+  
+  .hero-imagen {
+    order: 1;
+  }
+  
+  .hero-imagen img {
+    max-width: 300px;
+  }
+  
+  .requisitos-lista {
+    grid-template-columns: 1fr;
+  }
+  
+  .semestres-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .maestria-detalle-grid {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+  
+  .hero-texto h1 {
+    font-size: 2.2rem;
+  }
+  
+  .detalles-hero,
+  .requisitos-extendidos, 
+  .grid-mapa, 
+  .grid-cta {
+    padding: 1.5rem;
+  }
+  
+  .hero-imagen img {
+    max-width: 250px;
+  }
+}
