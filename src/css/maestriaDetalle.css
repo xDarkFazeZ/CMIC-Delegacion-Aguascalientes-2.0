@@ -244,48 +244,6 @@
   border-bottom: none;
 }
 
-/* CTA SECTION */
-.grid-cta {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 3rem;
-  background: #fafafa;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
-
-.grid-cta h2 {
-  font-size: 1.8rem;
-  font-family: var(--subtitulos);
-  font-weight: 700;
-  color: var(--colorOscuro);
-  margin-bottom: 1rem;
-}
-
-.grid-cta p {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-.grid-cta button {
-  background: linear-gradient(135deg, var(--colorPrincipal), var(--colorSecundario));
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-}
-
-.grid-cta button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-}
-
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .hero-content {

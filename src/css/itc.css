@@ -1,4 +1,4 @@
-/* PAGINA INDEPENDIENTE DE ITC */
+/* --- PAGINA INDEPENDIENTE DE ITC --- */
 .servicios-page {
   min-height: 100vh;
   padding: 2rem;
@@ -8,9 +8,9 @@
   font-family: var(--texto);
 }
 
+/* HEADER */
 .servicios-header {
   text-align: center;
-  margin-bottom: 3rem;
   padding: 2rem 0;
 }
 
@@ -19,7 +19,7 @@
   font-family: var(--titulos);
   font-size: 2.8rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-top: -3rem;
 }
 
 .servicios-header p {
@@ -56,21 +56,25 @@
 .flip-card {
   background: transparent;
   perspective: 1200px;
-  height: 420px;
+  cursor: pointer;
+  height: 480px; /* Aumenté la altura para mejor proporción */
+  width: 100%;
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s ease-in-out;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
   border-radius: 16px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
+  box-shadow: 0 12px 24px rgba(114, 0, 0, 0.15);
 }
 
 /* Frente y reverso */
@@ -80,37 +84,67 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   padding: 1.5rem;
 }
 
-/* Frente */
+/* Frente - CONTENEDOR PARA IMAGENES DE ALTURA UNIFORME */
 .flip-card-front {
   background: #fff;
   border: 1px solid rgba(114, 0, 0, 0.1);
+  justify-content: flex-start;
 }
 
-.flip-card-front img {
+.imagen-contenedor {
   width: 100%;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
+  height: 2100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.flip-card-front .imagen-contenedor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Muestra la imagen completa sin recortar */
+  transition: transform 0.3s ease;
 }
 
 .flip-card-front h2 {
   color: var(--colorPrincipal);
   font-family: var(--titulos);
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 0 0.5rem;
+}
+
+.flip-indicator {
+  display: flex;
+  align-items: center;
+  color: var(--colorPrincipal);
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: auto;
+  padding: 0.5rem 0;
+}
+
+.flip-indicator i {
+  margin-right: 5px;
 }
 
 /* Reverso */
@@ -119,12 +153,18 @@
   transform: rotateY(180deg);
   text-align: left;
   border: 1px solid rgba(114, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
+/* Contenido scroll interno */
 .contenido-scroll {
+  flex-grow: 1;
+  min-height: 0;
   overflow-y: auto;
   padding-right: 0.5rem;
-  flex-grow: 1;
+  margin-bottom: 1rem;
 }
 
 .contenido-scroll::-webkit-scrollbar {
@@ -140,6 +180,7 @@
   background: var(--colorSecundario);
 }
 
+/* Titulos y listas reverso */
 .flip-card-back h3 {
   margin: 1rem 0 0.5rem;
   color: var(--colorPrincipal);
@@ -176,14 +217,7 @@
   left: 0;
 }
 
-/* Loading */
-.loading {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.2rem;
-  color: var(--colorTexto);
-}
-
+/* Botón detalles */
 .boton-detalles {
   margin-top: auto;
   display: flex;
@@ -204,6 +238,12 @@
   cursor: pointer;
   transition: var(--transition);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+}
+
+.boton-detalles button i {
+  margin-left: 8px;
 }
 
 .boton-detalles button:hover {
@@ -216,16 +256,60 @@
   transform: translateY(0);
 }
 
-/* Efectos adicionales para las tarjetas */
-.flip-card-inner {
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Aviso móvil */
+.mobile-notice {
+  display: none;
 }
 
-.flip-card:hover .flip-card-inner {
-  box-shadow: 0 12px 24px rgba(114, 0, 0, 0.15);
+/* Loading y errores */
+.error-container,
+.no-data-container,
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+  color: var(--colorTexto);
 }
 
-/* RESPONSIVE */
+.reload-button {
+  background: var(--colorPrincipal);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-family: var(--texto);
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--colorPrincipal);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Placeholder imagen */
+.image-placeholder {
+  width: 100%;
+  height: 220px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 968px) {
   .servicios-page {
     padding: 1rem;
@@ -236,37 +320,135 @@
   }
   
   .servicios-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
 
   .flip-card {
-    height: 460px;
-    max-width: 400px;
-    margin: 0 auto;
+    height: 500px;
+  }
+  
+  .imagen-contenedor {
+    height: 500px;
+  }
+    .flip-card-front h2 {
+    font-size: 1.5rem;
+    min-height: 60px;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  /* Desactivar hover en móviles */
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+  
+  .flip-card {
+    cursor: pointer;
+    height: 580px;
+    min-height: 580px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 1.5rem;
+  }
+
+  .imagen-contenedor {
+    height: 2000px;
+    margin-bottom: 1.5rem;
+  }
+
+  .contenido-scroll {
+    max-height: 280px;
+  }
+
   .servicios-header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
+  }
+
+  .mobile-notice {
+    display: block;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--colorTexto);
+    margin: -1.5rem 0 2rem 0;
+    padding: 0 1rem;
+  }
+  
+  .flip-card-front h2 {
+    font-size: 1.2rem;
+    min-height: 60px;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .flip-indicator {
+    font-size: 0.9rem;
+    padding: 0.8rem 0;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .servicios-page {
+    padding: 0.8rem;
+  }
+  
+  .servicios-header h1 {
+    font-size: 1.9rem;
   }
   
   .servicios-header p {
     font-size: 1rem;
   }
   
+  .flip-card {
+    height: 560px;
+    min-height: 560px;
+  }
+  
   .flip-card-front, 
   .flip-card-back {
-    padding: 1rem;
+    padding: 1.2rem;
   }
   
   .flip-card-front h2 {
     font-size: 1.3rem;
   }
   
-  .boton-detalles button {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.9rem;
+  .imagen-contenedor {
+    height: 180px;
   }
+  
+  .boton-detalles button {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.95rem;
+  }
+  
+  .flip-indicator {
+    font-size: 0.85rem;
+  }
+  
+  .mobile-notice {
+    font-size: 0.9rem;
+    margin: -1.2rem 0 1.8rem 0;
+  }
+  
+  .contenido-scroll {
+    max-height: 260px;
+  }
+  .imagen-contenedor {
+  width: 100%;
+  height: 2100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+}
+  
 }
