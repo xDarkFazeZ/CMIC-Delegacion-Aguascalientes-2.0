@@ -347,9 +347,14 @@
 @media (max-width: 768px) {
   /* Desactivar hover en móviles */
   .flip-card:hover .flip-card-inner {
-    transform: none;
+    transform: none !important;
   }
-  
+
+  /* Permitir scroll sin que se voltee la tarjeta */
+  .flip-card-inner {
+    touch-action: pan-y; /* solo scroll vertical */
+  }
+
   .flip-card {
     min-height: 520px;
   }
@@ -367,6 +372,12 @@
     max-height: 200px;
   }
 
+  /* Opcional: desactivar cursor pointer en móviles para evitar interferencias */
+  .flip-card {
+    cursor: default;
+  }
+
+  /* Ajustes de texto */
   .servicios-header h1 {
     font-size: 2rem;
   }
@@ -379,11 +390,11 @@
     margin: -1.5rem 0 2rem 0;
     padding: 0 1rem;
   }
-  
+
   .flip-card-front h2 {
     font-size: 1.2rem;
   }
-  
+
   .flip-indicator {
     font-size: 0.9rem;
     padding: 0.8rem 0;
