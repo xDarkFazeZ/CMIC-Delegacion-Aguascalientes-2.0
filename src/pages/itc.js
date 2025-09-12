@@ -40,7 +40,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// Hook personalizado para detección de mobile real
+// 🔹 Hook personalizado para detección de mobile real
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -117,15 +117,12 @@ const ServiciosITC = () => {
   const [maestrias, setMaestrias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // 🔹 Nuevo: en lugar de flippedCards usamos un único estado
   const [activeCardId, setActiveCardId] = useState(null);
 
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const abortControllerRef = useRef(null);
 
-  // Función para sanitizar y validar datos
   const sanitizeData = useCallback((data) => {
     if (!Array.isArray(data)) return [];
     
@@ -146,7 +143,6 @@ const ServiciosITC = () => {
     }));
   }, []);
 
-  // Función para obtener maestrías
   const fetchMaestrias = useCallback(async () => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
@@ -202,7 +198,6 @@ const ServiciosITC = () => {
     };
   }, [fetchMaestrias]);
 
-  // 🔹 Función para voltear tarjeta en móviles
   const toggleFlip = useCallback((id, event) => {
     if (isMobile) {
       event.stopPropagation();
@@ -210,16 +205,11 @@ const ServiciosITC = () => {
     }
   }, [isMobile]);
 
-  // 🔹 Navegar en desktop
   const handleMaestriaClick = useCallback((nombreMaestria, event) => {
-    if (isMobile) {
-      return;
-    }
-    const encodedName = encodeURIComponent(nombreMaestria);
-    navigate(`/maestria/${encodedName}`);
+    if (isMobile) return;
+    navigate(`/maestria/${encodeURIComponent(nombreMaestria)}`);
   }, [navigate, isMobile]);
 
-  // 🔹 Manejar teclado
   const handleKeyPress = useCallback((event, nombreMaestria, id) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -231,7 +221,6 @@ const ServiciosITC = () => {
     }
   }, [handleMaestriaClick, isMobile]);
 
-  // 🔹 Cerrar tarjetas al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobile && !event.target.closest('.flip-card')) {
@@ -244,7 +233,6 @@ const ServiciosITC = () => {
     };
   }, [isMobile]);
 
-  // Memoizar la lista de maestrías
   const maestriasList = useCallback(() => {
     return maestrias.map((maestria, index) => (
       <MaestriaCard
@@ -260,22 +248,14 @@ const ServiciosITC = () => {
     ));
   }, [maestrias, activeCardId, isMobile, toggleFlip, handleKeyPress, handleMaestriaClick]);
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return <ErrorMessage error={error} onRetry={fetchMaestrias} />;
-  }
-
-  if (!maestrias.length) {
-    return (
-      <div className="no-data-container" aria-live="polite">
-        <h2>No hay maestrías disponibles</h2>
-        <p>No se encontraron maestrías en este momento.</p>
-      </div>
-    );
-  }
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage error={error} onRetry={fetchMaestrias} />;
+  if (!maestrias.length) return (
+    <div className="no-data-container" aria-live="polite">
+      <h2>No hay maestrías disponibles</h2>
+      <p>No se encontraron maestrías en este momento.</p>
+    </div>
+  );
 
   return (
     <div className="servicios-page">
@@ -301,10 +281,7 @@ const ServiciosITC = () => {
         </p>
       )}
 
-      <section 
-        className="servicios-container" 
-        aria-label="Lista de maestrías disponibles"
-      >
+      <section className="servicios-container" aria-label="Lista de maestrías disponibles">
         {maestriasList()}
       </section>
     </div>
@@ -339,7 +316,6 @@ const MaestriaCard = React.memo(({
       onKeyDown={(e) => onKeyPress(e, maestria.nombre_maestria, maestria._id)}
     >
       <div className="flip-card-inner">
-        {/* Frente */}
         <div className="flip-card-front">
           <div className="imagen-contenedor">
             {maestria.imagen ? (
@@ -365,7 +341,6 @@ const MaestriaCard = React.memo(({
           )}
         </div>
 
-        {/* Reverso */}
         <div className="flip-card-back">
           <div className="contenido-scroll">
             <section aria-labelledby={`requisitos-${index}`}>
