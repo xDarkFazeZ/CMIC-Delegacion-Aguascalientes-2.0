@@ -214,35 +214,35 @@ const MaestriaDetalle = () => {
               </h2>
               <div className="detalles-lista">
                 <div className="detalle-item">
-                  <span className="detalle-icono" aria-hidden="true">⏱</span>
+                  <span className="detalle-icono" aria-hidden="true"></span>
                   <div className="detalle-contenido">
                     <h3>Duración</h3>
                     <p>{maestria.detalles_maestria.duracion}</p>
                   </div>
                 </div>
                 <div className="detalle-item">
-                  <span className="detalle-icono" aria-hidden="true">🕒</span>
+                  <span className="detalle-icono" aria-hidden="true"></span>
                   <div className="detalle-contenido">
                     <h3>Horario</h3>
                     <p>{maestria.detalles_maestria.horario}</p>
                   </div>
                 </div>
                 <div className="detalle-item">
-                  <span className="detalle-icono" aria-hidden="true">💻</span>
+                  <span className="detalle-icono" aria-hidden="true"></span>
                   <div className="detalle-contenido">
                     <h3>Modalidad</h3>
                     <p>{maestria.detalles_maestria.modalidad_asignaturas}</p>
                   </div>
                 </div>
                 <div className="detalle-item">
-                  <span className="detalle-icono" aria-hidden="true">🌐</span>
+                  <span className="detalle-icono" aria-hidden="true"></span>
                   <div className="detalle-contenido">
                     <h3>Plataforma</h3>
                     <p>{maestria.detalles_maestria.plataforma_tecnologica}</p>
                   </div>
                 </div>
                 <div className="detalle-item">
-                  <span className="detalle-icono" aria-hidden="true">🎓</span>
+                  <span className="detalle-icono" aria-hidden="true"></span>
                   <div className="detalle-contenido">
                     <h3>Titulación</h3>
                     <p>{maestria.detalles_maestria.titulacion}</p>

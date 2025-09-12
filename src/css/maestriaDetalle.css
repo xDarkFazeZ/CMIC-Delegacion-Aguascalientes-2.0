@@ -68,6 +68,7 @@
   font-weight: 700;
   color: var(--colorPrincipal);
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .detalles-lista {
@@ -142,6 +143,7 @@
   font-weight: 700;
   color: var(--colorPrincipal);
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .requisitos-lista {
@@ -192,6 +194,7 @@
   font-weight: 700;
   color: var(--colorPrincipal);
   margin-bottom: 1.2rem;
+  text-align: center;
 }
 
 .semestres-grid {
@@ -207,6 +210,7 @@
   padding: 2rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: var(--transition);
+  text-align: center;
 }
 
 .semestre-card:hover {
@@ -224,6 +228,8 @@
 
 .semestre-card ul {
   list-style: none;
+  padding: 0;
+  text-align: left;
 }
 
 .semestre-card li {
@@ -245,6 +251,30 @@
 
 .semestre-card li:last-child {
   border-bottom: none;
+}
+
+/* CTA SECTION */
+.grid-cta {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2.5rem;
+  background: #fafafa;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.grid-cta h2 {
+  font-size: 1.8rem;
+  font-family: var(--subtitulos);
+  font-weight: 700;
+  color: var(--colorPrincipal);
+  margin-bottom: 1rem;
+}
+
+.grid-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--colorTexto);
 }
 
 .boton-whatsapp-container {
@@ -282,8 +312,13 @@
   font-size: 1.2rem;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - CENTRADO PARA MÓVILES */
 @media (max-width: 900px) {
+  .maestria-detalle-grid {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
@@ -292,22 +327,53 @@
 
   .hero-columna-izquierda {
     order: 2;
+    align-items: center;
+  }
+
+  .hero-texto {
+    text-align: center;
   }
 
   .hero-imagen {
     order: 1;
+    justify-content: center;
   }
 
   .hero-imagen img {
     max-width: 300px;
   }
 
+  .detalles-hero {
+    text-align: center;
+    width: 100%;
+  }
+
+  .detalles-lista {
+    align-items: center;
+  }
+
   .requisitos-lista {
     grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .requisito-item {
+    gap: 0.5rem;
   }
 
   .semestres-grid {
     grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .semestre-card {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .semestre-card ul {
+    text-align: left;
   }
 }
 
@@ -331,8 +397,91 @@
   .hero-imagen img {
     max-width: 250px;
   }
+  
   .boton-whatsapp {
     width: 100%;
     max-width: 250px;
+  }
+  
+  .detalle-item {
+    text-align: center;
+  }
+  
+  .requisito-item {
+    text-align: center;
+  }
+  
+  .semestre-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 300px) {
+  .maestria-detalle-grid {
+    padding: 1.5rem 0.8rem;
+    gap: 1.5rem;
+  }
+  
+  .hero-texto h1 {
+    font-size: 1.8rem;
+  }
+  
+  .objetivo-text {
+    font-size: 1rem;
+  }
+  
+  .detalles-hero,
+  .requisitos-extendidos,
+  .grid-mapa,
+  .grid-cta {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .hero-imagen img {
+    max-width: 200px;
+  }
+  
+  .detalle-icono {
+    font-size: 1.4rem;
+  }
+  
+  .detalle-contenido h3 {
+    font-size: 1rem;
+  }
+  
+  .detalle-contenido p {
+    font-size: 0.95rem;
+  }
+  
+  .requisitos-contenedor h2,
+  .grid-mapa h2,
+  .grid-cta h2 {
+    font-size: 1.4rem;
+  }
+  
+  .requisito-item p {
+    font-size: 0.95rem;
+  }
+  
+  .semestre-card {
+    padding: 1rem;
+  }
+  
+  .semestre-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .semestre-card li {
+    font-size: 0.95rem;
+    padding-left: 1rem;
+  }
+  
+  .boton-whatsapp {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    min-width: auto;
+    width: 100%;
   }
 }

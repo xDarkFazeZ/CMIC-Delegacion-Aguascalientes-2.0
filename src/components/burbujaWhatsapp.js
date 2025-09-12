@@ -4,7 +4,7 @@ import '../css/burbujaWhatsapp.css';
 const burbujaWhatsapp = () => {
   const handleWhatsAppClick = () => {
     const phoneNumber = "+5214494401155"; // Reemplaza con tu número
-    const message = "Hola, me gustaría obtener más información.";
+    const message = "Hola, me gustaría obtener más información de ustedes.";
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
