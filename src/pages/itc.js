@@ -40,14 +40,18 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// Hook personalizado para detección de viewport
+// Hook personalizado para detección de mobile real
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isPhone = /android|iphone|ipod|windows phone/.test(userAgent);
       const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      setIsMobile(window.innerWidth <= 1024 || hasTouch);
+      const isSmallScreen = window.innerWidth <= 1024;
+
+      setIsMobile(isPhone || (hasTouch && isSmallScreen));
     };
 
     checkIsMobile();
@@ -67,7 +71,8 @@ const useIsMobile = () => {
   }, []);
 
   return isMobile;
-}
+};
+
 // Componente de carga optimizado
 const LoadingSpinner = React.memo(() => (
   <div className="loading-container" aria-live="polite" aria-busy="true">
