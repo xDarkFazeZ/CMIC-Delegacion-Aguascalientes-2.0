@@ -188,7 +188,7 @@ const Nosotros = () => {
                   <strong>Hacia el exterior:</strong> Desarrollar oportunidades y fomentar la inversión, proponiendo cambios regulatorios; proporcionar conocimiento del mercado con servicios especializados; definir la estructura del sector; facilitar la integración de cadenas productivas de financiamiento.
                 </p>
                 <p className="vision-parrafo">
-                  <strong>H hacia el interior:</strong> Redimensionar la estructura administrativa, con mejora de servicios; institucionalizar con buena imagen y comunicación; y reforzar la presencia del sector ante clientes y oportunidades.
+                  <strong>Hacia el interior:</strong> Redimensionar la estructura administrativa, con mejora de servicios; institucionalizar con buena imagen y comunicación; y reforzar la presencia del sector ante clientes y oportunidades.
                 </p>
               </div>
             </section>
