@@ -46,28 +46,28 @@ const useIsMobile = () => {
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      setIsMobile(window.innerWidth <= 1024 || hasTouch);
     };
-    
+
     checkIsMobile();
-    
+
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(checkIsMobile, 100);
     };
-    
-    window.addEventListener('resize', handleResize);
-    
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimeout);
     };
   }, []);
 
   return isMobile;
-};
-
+}
 // Componente de carga optimizado
 const LoadingSpinner = React.memo(() => (
   <div className="loading-container" aria-live="polite" aria-busy="true">
@@ -112,7 +112,10 @@ const ServiciosITC = () => {
   const [maestrias, setMaestrias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [flippedCards, setFlippedCards] = useState({});
+
+  // 🔹 Nuevo: en lugar de flippedCards usamos un único estado
+  const [activeCardId, setActiveCardId] = useState(null);
+
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const abortControllerRef = useRef(null);
@@ -194,52 +197,42 @@ const ServiciosITC = () => {
     };
   }, [fetchMaestrias]);
 
-  // Función para voltear tarjeta en móviles
+  // 🔹 Función para voltear tarjeta en móviles
   const toggleFlip = useCallback((id, event) => {
     if (isMobile) {
       event.stopPropagation();
-      setFlippedCards(prev => ({
-        ...prev,
-        [id]: !prev[id]
-      }));
+      setActiveCardId(prev => (prev === id ? null : id));
     }
   }, [isMobile]);
 
-  // Función para navegar a detalles de maestría
+  // 🔹 Navegar en desktop
   const handleMaestriaClick = useCallback((nombreMaestria, event) => {
     if (isMobile) {
       return;
     }
-    
     const encodedName = encodeURIComponent(nombreMaestria);
     navigate(`/maestria/${encodedName}`);
   }, [navigate, isMobile]);
 
-  // Función para manejar key press en tarjetas
+  // 🔹 Manejar teclado
   const handleKeyPress = useCallback((event, nombreMaestria, id) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       if (isMobile) {
-        setFlippedCards(prev => ({
-          ...prev,
-          [id]: !prev[id]
-        }));
+        setActiveCardId(prev => (prev === id ? null : id));
       } else {
         handleMaestriaClick(nombreMaestria, event);
       }
     }
   }, [handleMaestriaClick, isMobile]);
 
-  // Efecto para cerrar tarjetas al hacer clic fuera de ellas en móviles
+  // 🔹 Cerrar tarjetas al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMobile) {
-        if (!event.target.closest('.flip-card')) {
-          setFlippedCards({});
-        }
+      if (isMobile && !event.target.closest('.flip-card')) {
+        setActiveCardId(null);
       }
     };
-
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
@@ -253,14 +246,14 @@ const ServiciosITC = () => {
         key={maestria._id}
         maestria={maestria}
         index={index}
-        isFlipped={!!flippedCards[maestria._id]}
+        isFlipped={activeCardId === maestria._id}
         isMobile={isMobile}
         onToggleFlip={toggleFlip}
         onKeyPress={handleKeyPress}
         onClick={handleMaestriaClick}
       />
     ));
-  }, [maestrias, flippedCards, isMobile, toggleFlip, handleKeyPress, handleMaestriaClick]);
+  }, [maestrias, activeCardId, isMobile, toggleFlip, handleKeyPress, handleMaestriaClick]);
 
   if (loading) {
     return <LoadingSpinner />;

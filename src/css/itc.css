@@ -329,7 +329,7 @@
   }
   
   .imagen-contenedor {
-    height: 500px;
+    height: 968px;
   }
     .flip-card-front h2 {
     font-size: 1.5rem;
@@ -362,7 +362,7 @@
   }
 
   .contenido-scroll {
-    max-height: 280px;
+    max-height: 768px;
   }
 
   .servicios-header h1 {
@@ -438,7 +438,7 @@
   }
   
   .contenido-scroll {
-    max-height: 260px;
+    max-height: 480px;
   }
   .imagen-contenedor {
   width: 100%;
