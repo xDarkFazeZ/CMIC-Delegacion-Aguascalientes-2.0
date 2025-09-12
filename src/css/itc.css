@@ -146,8 +146,35 @@
   padding: 0.5rem 0;
 }
 
-.flip-indicator i {
+.flip-indicator span {
   margin-right: 5px;
+}
+
+/* Botón móvil */
+.mobile-info-button {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.mobile-info-button button {
+  background: linear-gradient(135deg, var(--colorPrincipal), var(--colorSecundario));
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-family: var(--subtitulos);
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-info-button button:hover {
+  background: linear-gradient(135deg, var(--colorSecundario), var(--colorPrincipal));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* Reverso */
@@ -165,7 +192,7 @@
 .contenido-scroll {
   flex-grow: 1;
   min-height: 0;
-  max-height: 250px;
+  max-height: 360px;
   overflow-y: auto;
   width: 100%;
   padding-right: 0.5rem;
@@ -247,7 +274,7 @@
   align-items: center;
 }
 
-.boton-detalles button i {
+.boton-detalles button span {
   margin-left: 8px;
 }
 
@@ -259,11 +286,6 @@
 
 .boton-detalles button:active {
   transform: translateY(0);
-}
-
-/* Aviso móvil */
-.mobile-notice {
-  display: none;
 }
 
 /* Loading y errores */
@@ -319,10 +341,10 @@
 /* Medianas */
 @media (max-width: 968px) {
   .servicios-page { padding: 1rem; }
-  .servicios-header h1 { font-size: 2.2rem; }
+  .servicios-header h1 { font-size: 2.2rem; margin-top: 10px;}
   .servicios-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
   .flip-card { min-height: 500px; }
-  .imagen-contenedor { height: 180px; }
+  .imagen-contenedor { height: 350px; }
   .flip-card-front h2 { font-size: 1.5rem; min-height: 60px; margin: 1rem 0 1.5rem 0; }
 }
 
@@ -331,30 +353,38 @@
   /* Desactivar hover en móviles */
   .flip-card:hover .flip-card-inner { transform: none !important; }
 
+  /* Ocultar reverso en móviles */
+  .flip-card-back {
+    display: none !important;
+  }
+  
   /* Evitar que scroll active el flip */
   .flip-card-inner { touch-action: pan-y; }
 
   .flip-card { min-height: 520px; cursor: default; }
   .flip-card-front, .flip-card-back { padding: 1.2rem; }
-  .imagen-contenedor { height: 160px; }
-  .contenido-scroll { max-height: 200px; }
-  .servicios-header h1 { font-size: 2rem; }
-  .mobile-notice { display: block; text-align: center; font-size: 0.95rem; color: var(--colorTexto); margin: -1.5rem 0 2rem 0; padding: 0 1rem; }
+  .imagen-contenedor { height: 350px; }
+  .servicios-header h1 { font-size: 2rem; margin-top: 10px;}
   .flip-card-front h2 { font-size: 1.2rem; }
   .flip-indicator { font-size: 0.9rem; padding: 0.8rem 0; }
+  
+  /* Ajustes para el botón móvil */
+  .mobile-info-button button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
 }
 
 /* Móviles pequeños */
 @media (max-width: 480px) {
   .servicios-page { padding: 0.8rem; }
-  .servicios-header h1 { font-size: 1.9rem; }
+  .servicios-header h1 { font-size: 1.9rem; margin-top: 5px; }
   .servicios-header p { font-size: 1rem; }
   .flip-card { min-height: 480px; }
   .flip-card-front, .flip-card-back { padding: 1rem; }
   .flip-card-front h2 { font-size: 1.3rem; }
-  .imagen-contenedor { height: 140px; }
+  .imagen-contenedor { height: 350px; }
   .boton-detalles button { padding: 0.8rem 1.6rem; font-size: 0.95rem; }
   .flip-indicator { font-size: 0.85rem; }
-  .mobile-notice { font-size: 0.9rem; margin: -1.2rem 0 1.8rem 0; }
-  .contenido-scroll { max-height: 180px; }
+  .mobile-info-button button { padding: 0.9rem 1.2rem; font-size: 0.95rem; }
 }

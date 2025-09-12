@@ -199,9 +199,9 @@ const ServiciosITC = () => {
     };
   }, [fetchMaestrias]);
 
-  // Función para voltear tarjeta en móviles
+  // Función para voltear tarjeta (solo desktop)
   const toggleFlip = useCallback((id, event) => {
-    if (isMobile) {
+    if (!isMobile) {
       event.stopPropagation();
       setActiveCardId(prev => prev === id ? null : id);
     }
@@ -209,30 +209,24 @@ const ServiciosITC = () => {
 
   // Navegar en desktop
   const handleMaestriaClick = useCallback((nombreMaestria, event) => {
-    if (isMobile) {
-      return;
+    if (!isMobile) {
+      const encodedName = encodeURIComponent(nombreMaestria);
+      navigate(`/maestria/${encodedName}`);
     }
-    const encodedName = encodeURIComponent(nombreMaestria);
-    navigate(`/maestria/${encodedName}`);
   }, [navigate, isMobile]);
 
   // Manejar teclado
   const handleKeyPress = useCallback((event, nombreMaestria, id) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      if (isMobile) {
+      if (!isMobile) {
         setActiveCardId(prev => prev === id ? null : id);
       } else {
-        handleMaestriaClick(nombreMaestria, event);
+        const encodedName = encodeURIComponent(nombreMaestria);
+        navigate(`/maestria/${encodedName}`);
       }
     }
-  }, [handleMaestriaClick, isMobile]);
-
-  // DEBUG: Para verificar en consola
-  useEffect(() => {
-    console.log('Dispositivo móvil detectado:', isMobile);
-    console.log('Tarjeta activa:', activeCardId);
-  }, [isMobile, activeCardId]);
+  }, [navigate, isMobile]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -268,12 +262,6 @@ const ServiciosITC = () => {
           />
         </div>
       </header>
-
-      {isMobile && (
-        <p className="mobile-notice" role="status">
-          Toca cualquier tarjeta para ver los detalles de la maestría
-        </p>
-      )}
 
       <section 
         className="servicios-container" 
@@ -318,9 +306,9 @@ const MaestriaCard = React.memo(({
   return (
     <article 
       className={`flip-card ${isFlipped ? 'flipped' : ''}`}
-      aria-label={`Maestría en ${maestria.nombre_maestria}. ${isFlipped ? 'Mostrando detalles' : 'Mostrando información básica'}`}
+      aria-label={`Maestría en ${maestria.nombre_maestria}`}
       tabIndex={0}
-      onClick={(e) => onToggleFlip(maestria._id, e)}
+      onClick={(e) => !isMobile && onToggleFlip(maestria._id, e)}
       onKeyDown={(e) => onKeyPress(e, maestria.nombre_maestria, maestria._id)}
     >
       <div className="flip-card-inner">
@@ -343,14 +331,25 @@ const MaestriaCard = React.memo(({
           </div>
           <h2>{maestria.nombre_maestria}</h2>
           
-          {isMobile && (
+          {isMobile ? (
+            <div className="mobile-info-button">
+              <Link 
+                to={`/maestria/${encodeURIComponent(maestria.nombre_maestria)}`}
+                aria-label={`Ver más información sobre ${maestria.nombre_maestria}`}
+                onClick={(e) => e.stopPropagation()}
+                preventScrollReset={true}
+              >
+                <button>Más información</button>
+              </Link>
+            </div>
+          ) : (
             <div className="flip-indicator">
-              <span aria-hidden="true">↻</span> Toca para ver detalles
+              <span aria-hidden="true">↻</span> Pasa el cursor para ver detalles
             </div>
           )}
         </div>
 
-        {/* Reverso */}
+        {/* Reverso (solo visible en desktop) */}
         <div className="flip-card-back">
           <div className="contenido-scroll">
             <section aria-labelledby={`requisitos-${index}`}>
