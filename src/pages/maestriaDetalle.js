@@ -130,17 +130,25 @@ const MaestriaDetalle = () => {
     }
   }, [nombre]);
 
-  useEffect(() => {
-    fetchMaestria();
+  // Función para manejar el clic en el botón de WhatsApp
+  const handleWhatsAppClick = useCallback(() => {
+    // Número de teléfono específico (reemplaza con el número deseado)
+    const phoneNumber = "+5214494401155"; // Ejemplo: formato con código de país
+    // Mensaje predefinido
+    const message = `Hola, estoy interesado en la Maestría en ${maestria?.nombre_maestria}. ¿Podrían proporcionarme más información?`;
 
-    return () => {
-      // Cancelar petición al desmontar el componente
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, [fetchMaestria]);
+    // Codificar el mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
 
+    // Crear el enlace de WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(whatsappURL, '_blank');
+
+    // Aquí puedes implementar tracking de analytics
+    console.log("WhatsApp clicked for:", maestria?.nombre_maestria);
+  }, [maestria]);
 
   // Función para manejar errores de imagen
   const handleImageError = useCallback((e) => {
@@ -151,6 +159,17 @@ const MaestriaDetalle = () => {
     placeholder.innerHTML = '<span>Imagen no disponible</span>';
     e.target.parentNode.appendChild(placeholder);
   }, []);
+
+  useEffect(() => {
+    fetchMaestria();
+
+    return () => {
+      // Cancelar petición al desmontar el componente
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, [fetchMaestria]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -240,6 +259,8 @@ const MaestriaDetalle = () => {
                 alt={`Imagen representativa de ${maestria.nombre_maestria}`}
                 loading="lazy"
                 decoding="async"
+                width="600"
+                height="400"
                 onError={handleImageError}
               />
             </div>
@@ -297,6 +318,21 @@ const MaestriaDetalle = () => {
         </div>
       </section>
 
+      {/* CTA SECTION */}
+      <section className="grid-cta" aria-labelledby="cta-heading">
+        <h2 id="cta-heading">¿Interesado en esta maestría?</h2>
+        <p>Solicita más información y comienza tu proceso de admisión</p>
+        <div className="boton-whatsapp-container">
+          <button 
+            className="boton-whatsapp"
+            onClick={handleWhatsAppClick}
+            aria-label={`Contactar por WhatsApp sobre ${maestria.nombre_maestria}`}
+          >
+            <span className="icono-whatsapp">💬</span>
+            Contactar por WhatsApp
+          </button>
+        </div>
+      </section>
     </div>
   );
 };

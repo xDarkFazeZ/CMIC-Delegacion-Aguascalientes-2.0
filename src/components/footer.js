@@ -10,9 +10,15 @@ const Footer = () => {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
-  // Manejo de navegación con mejor accesibilidad
+  // Manejo de navegación con scroll al top
   const handleNavigation = useCallback((path) => {
     navigate(path);
+    // Scroll al top después de navegar
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
   }, [navigate]);
 
   // Manejo de teclado para navegación
@@ -20,6 +26,12 @@ const Footer = () => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       navigate(path);
+      // Scroll al top después de navegar
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+      });
     }
   }, [navigate]);
 
@@ -42,9 +54,9 @@ const Footer = () => {
               { path: "/", label: "Inicio" },
               { path: "/nosotros", label: "Nosotros" },
               { path: "/servicios", label: "Servicios" },
-              { path: "/noticias", label: "Noticias" },
-              { path: "/afiliados", label: "Afiliados" },
-              { path: "/contacto", label: "Contacto" }
+              { path: "/nosotros", label: "Nosotros" },
+              { path: "/icic", label: "ICIC" },
+              { path: "/itc", label: "ITC" }
             ].map((item) => (
               <li key={item.path}>
                 <button 

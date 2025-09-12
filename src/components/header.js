@@ -14,6 +14,12 @@ export default function Header() {
 
   const handleLinkClick = () => {
     if (isOpen) setIsOpen(false);
+    // Scroll al top cuando se hace clic en cualquier enlace
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
   };
 
   useEffect(() => {

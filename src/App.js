@@ -11,21 +11,22 @@ import Footer from "./components/footer";
 import Itc from "./pages/itc";
 import Nosotros from "./pages/nosotros";
 import MaestriaDetalle from "./pages/maestriaDetalle";
+import BurbujaWhatsapp from "./components/burbujaWhatsapp";
+import ScrollToTop from "./components/ScrollToTop";
 
-// Tu ID de Google Analytics 4
-const TRACKING_ID = "G-P8G72QZBJ2"; // <-- Reemplaza con tu ID
+const TRACKING_ID = "G-P8G72QZBJ2";
 ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Esto se ejecuta en cada cambio de URL
     ReactGA.send({ hitType: "pageview", page: location.pathname });
   }, [location]);
 
   return (
     <>
+      <ScrollToTop /> {/* Esto debe estar aquí */}
       <Header />
       <main role="main">
         <Routes>
@@ -48,6 +49,7 @@ const App = () => {
         </Routes>
       </main>
       <Footer />
+      <BurbujaWhatsapp />
     </>
   );
 };
